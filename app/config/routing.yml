@@ -1,0 +1,4 @@
+ynov_labs:
+    resource: "@YnovLabsBundle/Resources/config/routing.yml"
+    prefix:   /
+

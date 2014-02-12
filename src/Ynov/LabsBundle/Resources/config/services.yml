@@ -1,0 +1,7 @@
+parameters:
+#    ynov_labs.example.class: Ynov\LabsBundle\Example
+
+services:
+#    ynov_labs.example:
+#        class: %ynov_labs.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
