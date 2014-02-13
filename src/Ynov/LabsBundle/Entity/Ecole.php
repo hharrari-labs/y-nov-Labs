@@ -19,7 +19,7 @@ class Ecole
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idecole;
+    private $id;
 
     /**
      * @var string
@@ -42,9 +42,9 @@ class Ecole
      *
      * @return integer 
      */
-    public function getIdecole()
+    public function getId()
     {
-        return $this->idecole;
+        return $this->id;
     }
 
     /**

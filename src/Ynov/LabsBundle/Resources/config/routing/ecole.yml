@@ -1,0 +1,30 @@
+ecole:
+    pattern:  /
+    defaults: { _controller: "YnovLabsBundle:Ecole:index" }
+
+ecole_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YnovLabsBundle:Ecole:show" }
+
+ecole_new:
+    pattern:  /new
+    defaults: { _controller: "YnovLabsBundle:Ecole:new" }
+
+ecole_create:
+    pattern:  /create
+    defaults: { _controller: "YnovLabsBundle:Ecole:create" }
+    requirements: { _method: post }
+
+ecole_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YnovLabsBundle:Ecole:edit" }
+
+ecole_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YnovLabsBundle:Ecole:update" }
+    requirements: { _method: post|put }
+
+ecole_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YnovLabsBundle:Ecole:delete" }
+    requirements: { _method: post|delete }
