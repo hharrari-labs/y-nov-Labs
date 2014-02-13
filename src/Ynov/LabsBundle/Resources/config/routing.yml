@@ -13,3 +13,9 @@ YnovLabsBundle_ecole:
 YnovLabsBundle_evenement:
     resource: "@YnovLabsBundle/Resources/config/routing/evenement.yml"
     prefix:   /evenement
+
+YnovLabsBundle_labs:
+     resource: "@YnovLabsBundle/Resources/config/routing/labs.yml"
+     prefix:   /labs
+
+    

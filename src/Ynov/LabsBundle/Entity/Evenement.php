@@ -87,7 +87,7 @@ class Evenement
      *
      * @return integer 
      */
-    public function getIdevenement()
+    public function getI()
     {
         return $this->id;
     }
