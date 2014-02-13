@@ -1,3 +1,6 @@
 ynov_labs_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: YnovLabsBundle:Default:index }
+YnovLabsBundle_contact:
+    resource: "@YnovLabsBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact
