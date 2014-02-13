@@ -19,7 +19,7 @@ class Evenement
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idevenement;
+    private $id;
 
     /**
      * @var string
@@ -83,13 +83,13 @@ class Evenement
 
 
     /**
-     * Get idevenement
+     * Get id
      *
      * @return integer 
      */
     public function getIdevenement()
     {
-        return $this->idevenement;
+        return $this->id;
     }
 
     /**

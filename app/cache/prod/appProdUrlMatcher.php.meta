@@ -1,1 +1,1 @@
-a:1:{i:0;C:46:"Symfony\Component\Config\Resource\FileResource":48:{s:40:"C:\wamp\www\y-nov\app\config\routing.yml";}}
+a:2:{i:0;C:46:"Symfony\Component\Config\Resource\FileResource":53:{s:45:"C:\wamp\www\y-nov.labs\app\config\routing.yml";}i:1;C:46:"Symfony\Component\Config\Resource\FileResource":79:{s:71:"C:\wamp\www\y-nov.labs\src\Ynov\LabsBundle\Resources\config\routing.yml";}}

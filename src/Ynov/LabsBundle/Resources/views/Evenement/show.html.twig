@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Evenement</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ entity.titre }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ entity.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Dateevenement</th>
+                <td>{{ entity.dateevenement|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Lienevenement</th>
+                <td>{{ entity.lienevenement }}</td>
+            </tr>
+            <tr>
+                <th>Descriptionevenement</th>
+                <td>{{ entity.descriptionevenement }}</td>
+            </tr>
+            <tr>
+                <th>Datemajevenement</th>
+                <td>{{ entity.datemajevenement|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('evenement') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('evenement_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
