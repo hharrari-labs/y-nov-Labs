@@ -31,12 +31,12 @@ class __TwigTemplate_d20c930dab358f589cd88d3a052c778576de06b6b17fe3d020427f4ab7a
     {
         // line 4
         echo "    ";
-        if ($this->getAttribute($this->getContext($context, "collector"), "hasexception")) {
+        if ($this->getAttribute((isset($context["collector"]) ? $context["collector"] : $this->getContext($context, "collector")), "hasexception")) {
             // line 5
             echo "        <style>
             ";
             // line 6
-            echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('routing')->getPath("_profiler_exception_css", array("token" => $this->getContext($context, "token"))));
+            echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('routing')->getPath("_profiler_exception_css", array("token" => (isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")))));
             echo "
         </style>
     ";
@@ -58,7 +58,7 @@ class __TwigTemplate_d20c930dab358f589cd88d3a052c778576de06b6b17fe3d020427f4ab7a
     <span class=\"count\">
         ";
         // line 17
-        if ($this->getAttribute($this->getContext($context, "collector"), "hasexception")) {
+        if ($this->getAttribute((isset($context["collector"]) ? $context["collector"] : $this->getContext($context, "collector")), "hasexception")) {
             // line 18
             echo "            <span>1</span>
         ";
@@ -77,7 +77,7 @@ class __TwigTemplate_d20c930dab358f589cd88d3a052c778576de06b6b17fe3d020427f4ab7a
 
     ";
         // line 27
-        if ((!$this->getAttribute($this->getContext($context, "collector"), "hasexception"))) {
+        if ((!$this->getAttribute((isset($context["collector"]) ? $context["collector"] : $this->getContext($context, "collector")), "hasexception"))) {
             // line 28
             echo "        <p>
             <em>No exception was thrown and uncaught during the request.</em>
@@ -88,7 +88,7 @@ class __TwigTemplate_d20c930dab358f589cd88d3a052c778576de06b6b17fe3d020427f4ab7a
             echo "        <div class=\"sf-reset\">
             ";
             // line 33
-            echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('routing')->getPath("_profiler_exception", array("token" => $this->getContext($context, "token"))));
+            echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('routing')->getPath("_profiler_exception", array("token" => (isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")))));
             echo "
         </div>
     ";

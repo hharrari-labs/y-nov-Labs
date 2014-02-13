@@ -32,3 +32,4 @@ dab9b4,::1,GET,http://localhost/y-nov/app_dev.php/_configurator/step/1,139220123
 2863af,::1,POST,http://localhost/y-nov/app_dev.php/_configurator/step/1,1392201236,
 1de94e,::1,GET,http://localhost/y-nov/app_dev.php/_configurator/final,1392201239,
 969f62,::1,GET,http://localhost/y-nov/app_dev.php/,1392201245,
+93c935,::1,GET,http://localhost/y-nov/web/app_dev.php/,1392289236,

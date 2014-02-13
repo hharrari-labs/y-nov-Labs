@@ -1,3 +1,11 @@
 ynov_labs_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: YnovLabsBundle:Default:index }
+
+YnovLabsBundle_ecole:
+    resource: "@YnovLabsBundle/Resources/config/routing/ecole.yml"
+    prefix:   /ecole    
+
+YnovLabsBundle_evenement:
+    resource: "@YnovLabsBundle/Resources/config/routing/evenement.yml"
+    prefix:   /evenement
