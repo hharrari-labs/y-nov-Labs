@@ -19,7 +19,7 @@ class Contact
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idcontact;
+    private $id;
 
     /**
      * @var string
@@ -49,9 +49,9 @@ class Contact
      *
      * @return integer 
      */
-    public function getIdcontact()
+    public function getId()
     {
-        return $this->idcontact;
+        return $this->id;
     }
 
     /**

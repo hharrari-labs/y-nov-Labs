@@ -1,0 +1,30 @@
+contact:
+    pattern:  /
+    defaults: { _controller: "YnovLabsBundle:Contact:index" }
+
+contact_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YnovLabsBundle:Contact:show" }
+
+contact_new:
+    pattern:  /new
+    defaults: { _controller: "YnovLabsBundle:Contact:new" }
+
+contact_create:
+    pattern:  /create
+    defaults: { _controller: "YnovLabsBundle:Contact:create" }
+    requirements: { _method: post }
+
+contact_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YnovLabsBundle:Contact:edit" }
+
+contact_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YnovLabsBundle:Contact:update" }
+    requirements: { _method: post|put }
+
+contact_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YnovLabsBundle:Contact:delete" }
+    requirements: { _method: post|delete }

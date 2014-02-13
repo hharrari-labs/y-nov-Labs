@@ -140,6 +140,69 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'ynov_labs_homepage')), array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\DefaultController::indexAction',));
         }
 
+
+
+        if (0 === strpos($pathinfo, '/contact')) {
+            // contact
+            if (rtrim($pathinfo, '/') === '/contact') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'contact');
+                }
+
+                return array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::indexAction',  '_route' => 'contact',);
+            }
+
+            // contact_show
+            if (preg_match('#^/contact/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'contact_show')), array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::showAction',));
+            }
+
+            // contact_new
+            if ($pathinfo === '/contact/new') {
+                return array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::newAction',  '_route' => 'contact_new',);
+            }
+
+            // contact_create
+            if ($pathinfo === '/contact/create') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_contact_create;
+                }
+
+                return array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::createAction',  '_route' => 'contact_create',);
+            }
+            not_contact_create:
+
+            // contact_edit
+            if (preg_match('#^/contact/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'contact_edit')), array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::editAction',));
+            }
+
+            // contact_update
+            if (preg_match('#^/contact/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                    $allow = array_merge($allow, array('POST', 'PUT'));
+                    goto not_contact_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'contact_update')), array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::updateAction',));
+            }
+            not_contact_update:
+
+            // contact_delete
+            if (preg_match('#^/contact/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                    $allow = array_merge($allow, array('POST', 'DELETE'));
+                    goto not_contact_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'contact_delete')), array (  '_controller' => 'Ynov\\LabsBundle\\Controller\\ContactController::deleteAction',));
+            }
+            not_contact_delete:
+
+        }
+
+
         // _welcome
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
