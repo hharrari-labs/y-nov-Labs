@@ -17,5 +17,9 @@ YnovLabsBundle_evenement:
 YnovLabsBundle_labs:
      resource: "@YnovLabsBundle/Resources/config/routing/labs.yml"
      prefix:   /labs
+     
+YnovLabsBundle_photo:
+     resource: "@YnovLabsBundle/Resources/config/routing/photo.yml"
+     prefix:   /photo
 
     

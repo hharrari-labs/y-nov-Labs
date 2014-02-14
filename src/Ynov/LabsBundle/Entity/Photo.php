@@ -19,7 +19,7 @@ class Photo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idphoto;
+    private $id;
 
     /**
      * @var string
@@ -38,13 +38,13 @@ class Photo
 
 
     /**
-     * Get idphoto
+     * Get id
      *
      * @return integer 
      */
-    public function getIdphoto()
+    public function getId()
     {
-        return $this->idphoto;
+        return $this->id;
     }
 
     /**
