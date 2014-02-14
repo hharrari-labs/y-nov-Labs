@@ -1,0 +1,30 @@
+projet:
+    pattern:  /
+    defaults: { _controller: "YnovLabsBundle:Projet:index" }
+
+projet_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YnovLabsBundle:Projet:show" }
+
+projet_new:
+    pattern:  /new
+    defaults: { _controller: "YnovLabsBundle:Projet:new" }
+
+projet_create:
+    pattern:  /create
+    defaults: { _controller: "YnovLabsBundle:Projet:create" }
+    requirements: { _method: post }
+
+projet_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YnovLabsBundle:Projet:edit" }
+
+projet_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YnovLabsBundle:Projet:update" }
+    requirements: { _method: post|put }
+
+projet_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YnovLabsBundle:Projet:delete" }
+    requirements: { _method: post|delete }

@@ -21,5 +21,10 @@ YnovLabsBundle_labs:
 YnovLabsBundle_photo:
      resource: "@YnovLabsBundle/Resources/config/routing/photo.yml"
      prefix:   /photo
+     
+YnovLabsBundle_projet:
+    resource: "@YnovLabsBundle/Resources/config/routing/projet.yml"
+    prefix:   /projet
+
 
     
