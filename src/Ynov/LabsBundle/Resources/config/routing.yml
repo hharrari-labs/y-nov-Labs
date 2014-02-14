@@ -26,5 +26,8 @@ YnovLabsBundle_projet:
     resource: "@YnovLabsBundle/Resources/config/routing/projet.yml"
     prefix:   /projet
 
+YnovLabsBundle_site:
+      resource: "@YnovLabsBundle/Resources/config/routing/site.yml"
+      prefix:   /site
 
     
