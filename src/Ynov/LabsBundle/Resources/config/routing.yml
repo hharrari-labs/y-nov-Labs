@@ -30,4 +30,8 @@ YnovLabsBundle_site:
       resource: "@YnovLabsBundle/Resources/config/routing/site.yml"
       prefix:   /site
 
+YnovLabsBundle_statut:
+    resource: "@YnovLabsBundle/Resources/config/routing/statut.yml"
+    prefix:   /statut
+
     
