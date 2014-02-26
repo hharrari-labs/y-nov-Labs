@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Utilisateur list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomutilisateur</th>
+                <th>Membres</th>
+                <th>Goupe</th>
+                <th>Annee</th>
+                <th>Password</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('utilisateur_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nomutilisateur }}</td>
+                <td>{{ entity.membres }}</td>
+                <td>{{ entity.goupe }}</td>
+                <td>{% if entity.annee %}{{ entity.annee|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.password }}</td>
+                <td>{{ entity.adresse }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('utilisateur_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('utilisateur_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('utilisateur_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

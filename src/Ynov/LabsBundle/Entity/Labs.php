@@ -19,7 +19,7 @@ class Labs
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idlab;
+    private $id;
 
     /**
      * @var string
@@ -69,13 +69,13 @@ class Labs
 
 
     /**
-     * Get idlab
+     * Get id
      *
      * @return integer 
      */
-    public function getIdlab()
+    public function getI()
     {
-        return $this->idlab;
+        return $this->id;
     }
 
     /**

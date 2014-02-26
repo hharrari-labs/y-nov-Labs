@@ -19,7 +19,7 @@ class Projet
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idprojet;
+    private $id;
 
     /**
      * @var string
@@ -134,13 +134,13 @@ class Projet
 
 
     /**
-     * Get idprojet
+     * Get id
      *
      * @return integer 
      */
-    public function getIdprojet()
+    public function getId()
     {
-        return $this->idprojet;
+        return $this->id;
     }
 
     /**

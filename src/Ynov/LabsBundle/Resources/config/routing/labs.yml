@@ -1,0 +1,30 @@
+labs:
+    pattern:  /
+    defaults: { _controller: "YnovLabsBundle:Labs:index" }
+
+labs_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YnovLabsBundle:Labs:show" }
+
+labs_new:
+    pattern:  /new
+    defaults: { _controller: "YnovLabsBundle:Labs:new" }
+
+labs_create:
+    pattern:  /create
+    defaults: { _controller: "YnovLabsBundle:Labs:create" }
+    requirements: { _method: post }
+
+labs_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YnovLabsBundle:Labs:edit" }
+
+labs_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YnovLabsBundle:Labs:update" }
+    requirements: { _method: post|put }
+
+labs_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YnovLabsBundle:Labs:delete" }
+    requirements: { _method: post|delete }

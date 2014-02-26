@@ -2,10 +2,3 @@ ynov_labs:
     resource: "@YnovLabsBundle/Resources/config/routing.yml"
     prefix:   /
     
-YnovLabsBundle_ecole:
-    resource: "@YnovLabsBundle/Resources/config/routing/ecole.yml"
-    prefix:   /ecole    
-
-YnovLabsBundle_evenement:
-    resource: "@YnovLabsBundle/Resources/config/routing/evenement.yml"
-    prefix:   /evenement

@@ -1,9 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block body -%}
     <h1>Contact</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -24,14 +24,14 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
+        <ul class="table">
     <li>
-        <a href="{{ path('contact') }}">
+        <a class="btn btn-primary" href="{{ path('contact') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('contact_edit', { 'id': entity.id }) }}">
+        <a class="btn btn-success" href="{{ path('contact_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

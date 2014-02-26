@@ -19,7 +19,7 @@ class Statut
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idstatut;
+    private $id;
 
     /**
      * @var \DateTime
@@ -58,13 +58,13 @@ class Statut
 
 
     /**
-     * Get idstatut
+     * Get id
      *
      * @return integer 
      */
-    public function getIdstatut()
+    public function getId()
     {
-        return $this->idstatut;
+        return $this->id;
     }
 
     /**

@@ -19,7 +19,7 @@ class Site
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idsite;
+    private $id;
 
     /**
      * @var string
@@ -69,13 +69,13 @@ class Site
 
 
     /**
-     * Get idsite
+     * Get id
      *
      * @return integer 
      */
-    public function getIdsite()
+    public function getId()
     {
-        return $this->idsite;
+        return $this->id;
     }
 
     /**

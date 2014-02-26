@@ -1,0 +1,30 @@
+statut:
+    pattern:  /
+    defaults: { _controller: "YnovLabsBundle:Statut:index" }
+
+statut_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YnovLabsBundle:Statut:show" }
+
+statut_new:
+    pattern:  /new
+    defaults: { _controller: "YnovLabsBundle:Statut:new" }
+
+statut_create:
+    pattern:  /create
+    defaults: { _controller: "YnovLabsBundle:Statut:create" }
+    requirements: { _method: post }
+
+statut_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YnovLabsBundle:Statut:edit" }
+
+statut_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YnovLabsBundle:Statut:update" }
+    requirements: { _method: post|put }
+
+statut_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YnovLabsBundle:Statut:delete" }
+    requirements: { _method: post|delete }

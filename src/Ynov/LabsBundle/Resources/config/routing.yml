@@ -1,6 +1,41 @@
 ynov_labs_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: YnovLabsBundle:Default:index }
+    
 YnovLabsBundle_contact:
     resource: "@YnovLabsBundle/Resources/config/routing/contact.yml"
     prefix:   /contact
+    
+YnovLabsBundle_ecole:
+    resource: "@YnovLabsBundle/Resources/config/routing/ecole.yml"
+    prefix:   /ecole    
+
+YnovLabsBundle_evenement:
+    resource: "@YnovLabsBundle/Resources/config/routing/evenement.yml"
+    prefix:   /evenement
+
+YnovLabsBundle_labs:
+     resource: "@YnovLabsBundle/Resources/config/routing/labs.yml"
+     prefix:   /labs
+     
+YnovLabsBundle_photo:
+     resource: "@YnovLabsBundle/Resources/config/routing/photo.yml"
+     prefix:   /photo
+     
+YnovLabsBundle_projet:
+    resource: "@YnovLabsBundle/Resources/config/routing/projet.yml"
+    prefix:   /projet
+
+YnovLabsBundle_site:
+      resource: "@YnovLabsBundle/Resources/config/routing/site.yml"
+      prefix:   /site
+
+YnovLabsBundle_statut:
+    resource: "@YnovLabsBundle/Resources/config/routing/statut.yml"
+    prefix:   /statut
+
+YnovLabsBundle_utilisateur:
+    resource: "@YnovLabsBundle/Resources/config/routing/utilisateur.yml"
+    prefix:   /utilisateur
+
+    
