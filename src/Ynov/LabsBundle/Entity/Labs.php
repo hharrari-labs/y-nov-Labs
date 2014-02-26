@@ -73,7 +73,7 @@ class Labs
      *
      * @return integer 
      */
-    public function getI()
+    public function getId()
     {
         return $this->id;
     }
