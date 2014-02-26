@@ -1,5 +1,5 @@
 ynov_labs_homepage:
-    pattern:  /hello/{name}
+    pattern:  /accueil
     defaults: { _controller: YnovLabsBundle:Default:index }
     
 YnovLabsBundle_contact:
