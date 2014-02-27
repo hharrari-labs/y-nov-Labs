@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ynov\LabsBundle\Entity\Labs;
+use Ynov\LabsBundle\Entity\Site;
+use Ynov\LabsBundle\Entity\Statut;
 use Ynov\LabsBundle\Form\LabsType;
 
 /**
@@ -24,9 +26,18 @@ class LabsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('YnovLabsBundle:Labs')->findAll();
+             
+        foreach ($entities as $entity) {
+             
+            $table_statut[$entity->getId()] = $em->getRepository('YnovLabsBundle:Statut')->findByidlab($entity->getId());
+        }
+        var_dump($table_statut);
+        exit;
+        $site_entities = $em->getRepository('YnovLabsBundle:Site')->findAll();
 
         return $this->render('YnovLabsBundle:Labs:index.html.twig', array(
             'entities' => $entities,
+            'site_entities' => $site_entities,
         ));
     }
     /**

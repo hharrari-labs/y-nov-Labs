@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-
 <section id="subintro">
 <div class="jumbotron subhead" id="overview">
 	<div class="container">
@@ -24,8 +23,36 @@
 	</div>
 </div>
 </section>
-
-    <table class="records_list">
+<section id="maincontent">
+<div class="container">
+         {% for entity in entities %}
+                        <div class="row">
+				<div class="span3">
+					<div class="well well-primary">
+						<h2>{{ entity.nomlab }}</h2>
+						<p>
+							<span class="label">Disponible</span>
+						</p>
+                                                {% for site in site_entities %}
+						<ul class="check-white">
+							<li>{{ site.nomsite }}</li>
+						</ul>
+                                                {% endfor %}
+						<p>
+							<a class="btn btn-large" href="#"><i class=" icon"></i> En savoir +</a>
+						</p>
+					</div>
+				</div>
+                                <div class="span9">
+                                    <p>
+                                        {{ entity.descriptionlab }}
+                                    </p>
+                               </div>
+                        </div>
+    {% endfor %}
+  </div>
+</section>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
