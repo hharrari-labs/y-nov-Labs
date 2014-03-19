@@ -65,12 +65,16 @@ class Labs
      * })
      */
     private $idutilisateur;
-
     /**
-     * @ORM\ManyToOne(targetEntity="Site", inversedBy="labs")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Site
+     *
+     * @ORM\ManyToOne(targetEntity="Site")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDSITE", referencedColumnName="IDSITE")
+     * })
      */
-//    private $site;
+    private $idsite;
+
     /**
      * Get id
      *
@@ -217,5 +221,31 @@ class Labs
     public function getIdutilisateur()
     {
         return $this->idutilisateur;
+    }
+
+    /**
+     * Set idsite
+     *
+     * @param \Ynov\LabsBundle\Entity\Site $idsite
+     * @return Labs
+     */
+    public function setIdsite(\Ynov\LabsBundle\Entity\Site $idsite = null)
+    {
+        $this->idsite = $idsite;
+
+        return $this;
+    }
+
+    /**
+     * Get idsite
+     *
+     * @return \Ynov\LabsBundle\Entity\Site 
+     */
+    public function getIdsite()
+    {
+        return $this->idsite;
+    }
+    public function __toString() {
+        return $this->getNomlab();
     }
 }

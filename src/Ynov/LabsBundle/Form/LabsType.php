@@ -21,7 +21,13 @@ class LabsType extends AbstractType
             ->add('datemajlab')
             ->add('descriptionlab')
             ->add('idutilisateur')
-        ;
+            ->add('idsite','entity', array(
+                  'class' => 'YnovLabsBundle:Site',
+                  'property' => 'nomsite',
+                  'expanded' => true,
+                  'multiple' =>true,
+                  'required'    => true,
+                   ));
     }
     
     /**

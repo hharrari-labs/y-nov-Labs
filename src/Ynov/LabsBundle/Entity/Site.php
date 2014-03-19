@@ -65,6 +65,15 @@ class Site
      * })
      */
     private $idecole;
+    /**
+     * @var \Labs
+     *
+     * @ORM\ManyToOne(targetEntity="Labs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDLAB", referencedColumnName="IDLAB")
+     * })
+     */
+    private $idlab;
 
 //    /**
 //     * @ORM\OneToMany(targetEntity="Labs", mappedBy="Site")
@@ -218,36 +227,6 @@ class Site
     {
         return $this->idecole;
     }
-    /**
-     * Constructor
-     */
-//    public function __construct()
-//    {
-//        $this->labs = new \Doctrine\Common\Collections\ArrayCollection();
-//    }
-
-    /**
-     * Add labs
-     *
-     * @param \Ynov\LabsBundle\Entity\Labs $labs
-     * @return Site
-     */
-//    public function addLab(\Ynov\LabsBundle\Entity\Labs $labs)
-//    {
-//        $this->labs[] = $labs;
-//        $labs->setSite($this);
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove labs
-//     *
-//     * @param \Ynov\LabsBundle\Entity\Labs $labs
-//     */
-//    public function removeLab(\Ynov\LabsBundle\Entity\Labs $labs)
-//    {
-//        $this->labs->removeElement($labs);
-//    }
 
     /**
      * Get labs
@@ -257,5 +236,31 @@ class Site
     public function getLabs()
     {
         return $this->labs;
+    }
+
+    /**
+     * Set idlab
+     *
+     * @param \Ynov\LabsBundle\Entity\Labs $idlab
+     * @return Site
+     */
+    public function setIdlab(\Ynov\LabsBundle\Entity\Labs $idlab = null)
+    {
+        $this->idlab = $idlab;
+
+        return $this;
+    }
+
+    /**
+     * Get idlab
+     *
+     * @return \Ynov\LabsBundle\Entity\Labs 
+     */
+    public function getIdlab()
+    {
+        return $this->idlab;
+    }
+    public function __toString() {
+        return $this->getNomsite();
     }
 }
