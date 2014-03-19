@@ -27,28 +27,8 @@ class LabsController extends Controller
 
         $entities = $em->getRepository('YnovLabsBundle:Labs')->findAll();
          
-        foreach ($entities as $entity) {
-             
-            $table_statut[$entity->getId()] = $em->getRepository('YnovLabsBundle:Statut')->findByidlab($entity->getId());
-
-        }
-        
-//        var_dump($idsite);
-//        exit;
-        $site_entities = $em->getRepository('YnovLabsBundle:Site')->findAll();
-              
-        foreach ($site_entities as $site_entity) {
-            
-            $table_statut_site[$site_entity->getId()] = $em->getRepository('YnovLabsBundle:Statut')->findByidsite($site_entity->getId());
-            
-        }
-        
-        
-
         return $this->render('YnovLabsBundle:Labs:index.html.twig', array(
             'entities' => $entities,
-            'site_entities' => $site_entities,
-            'table_statut_site' => $table_statut_site,
         ));
     }
     /**
