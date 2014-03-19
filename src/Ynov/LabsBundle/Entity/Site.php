@@ -66,8 +66,11 @@ class Site
      */
     private $idecole;
 
-
-
+//    /**
+//     * @ORM\OneToMany(targetEntity="Labs", mappedBy="Site")
+//     */
+//    private $labs;
+    
     /**
      * Get id
      *
@@ -214,5 +217,45 @@ class Site
     public function getIdecole()
     {
         return $this->idecole;
+    }
+    /**
+     * Constructor
+     */
+//    public function __construct()
+//    {
+//        $this->labs = new \Doctrine\Common\Collections\ArrayCollection();
+//    }
+
+    /**
+     * Add labs
+     *
+     * @param \Ynov\LabsBundle\Entity\Labs $labs
+     * @return Site
+     */
+//    public function addLab(\Ynov\LabsBundle\Entity\Labs $labs)
+//    {
+//        $this->labs[] = $labs;
+//        $labs->setSite($this);
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove labs
+//     *
+//     * @param \Ynov\LabsBundle\Entity\Labs $labs
+//     */
+//    public function removeLab(\Ynov\LabsBundle\Entity\Labs $labs)
+//    {
+//        $this->labs->removeElement($labs);
+//    }
+
+    /**
+     * Get labs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLabs()
+    {
+        return $this->labs;
     }
 }

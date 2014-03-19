@@ -66,8 +66,11 @@ class Labs
      */
     private $idutilisateur;
 
-
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Site", inversedBy="labs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+//    private $site;
     /**
      * Get id
      *
