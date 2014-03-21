@@ -1,16 +1,35 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Ecole edit</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Modification d'un groupe d'Ecoles</h1>
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(edit_form.nomecole,'Nom')}}</td>
+                                    <td>{{ form_widget(edit_form.nomecole) }}</td>
+                                    <td>{{ form_errors(edit_form.nomecole) }}</td>
+                                </tr>
+                            </table>
+                                    
+                            <div>
+                                {{ form_widget(edit_form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(edit_form)}}</div>
 
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('ecole') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+                        <ul class="record_actions" style="margin-left: 0px;">
+                                <li  style="list-style-type: none;">
+                                    <a href="{{ path('ecole') }}">
+                                    Liste des groupes Ecoles
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    
 {% endblock %}

@@ -43,6 +43,10 @@ class LabsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $date = new DateTime("now", new DateTimeZone('Europe/Paris'));
+            $entity->setDatecreation($date);
+            $entity->setDatemajlab($date);
+            //$entity->setIdutilisateur($utilisateur);
             $em->persist($entity);
             $em->flush();
 

@@ -1,15 +1,66 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Site creation</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Creation d'une école</h1>
 
-    {{ form(form) }}
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(form.idecole,'Ecole')}}</td>
+                                    <td>{{ form_widget(form.idecole) }}</td>
+                                    <td>{{ form_errors(form.idecole) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.nomsite,'Site/Ville')}}</td>
+                                    <td>{{ form_widget(form.nomsite) }}</td>
+                                    <td>{{ form_errors(form.nomsite) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.adressesite,'Adresse')}}</td>
+                                    <td>{{ form_widget(form.adressesite) }}</td>
+                                    <td>{{ form_errors(form.adressesite) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.telephone,'Téléphone')}}</td>
+                                    <td>{{ form_widget(form.telephone) }}</td>
+                                    <td>{{ form_errors(form.telephone) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.fax,'Fax')}}</td>
+                                    <td>{{ form_widget(form.fax) }}</td>
+                                    <td>{{ form_errors(form.fax) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Cochez ci-dessous les Laboratoires proposés dans cette école</td>
+                                </tr>
+                                {%for lab in form.idlab%}
+                                <tr>  
+                                    <td>{{form_label(lab)}} </td>
+                                    <td>{{form_widget(lab)}}</td>
+                                    <td>&nbsp;</td>
+                                </tr>   
+                                 {%endfor%}
+                            </table>
+                                    
+                            <div>
+                                {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(form)}}</div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('site') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+                            <ul class="record_actions" style="margin-left: 0px;">
+                                <li  style="list-style-type: none;">
+                                    <a href="{{ path('site') }}">
+                                    Liste des Ecoles
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    
 {% endblock %}

@@ -1,15 +1,53 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Evenement creation</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Creation d'un Evénement</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('evenement') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(form.titre,'Titre')}}</td>
+                                    <td>{{ form_widget(form.titre) }}</td>
+                                    <td>{{ form_errors(form.titre) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.lieu,'Lieu')}}</td>
+                                    <td>{{ form_widget(form.lieu) }}</td>
+                                    <td>{{ form_errors(form.lieu) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.dateevenement,'Date')}}</td>
+                                    <td>{{ form_widget(form.dateevenement.date.day, {'attr': {'style': 'width:50px'}}) }}
+                                        {{ form_widget(form.dateevenement.date.month, {'attr': {'style': 'width:100px'}}) }}
+                                        {{ form_widget(form.dateevenement.date.year, {'attr': {'style': 'width:62px'}}) }}
+                                    </td>
+                                    <td>{{ form_errors(form.dateevenement) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.descriptionevenement,'Description')}}</td>
+                                    <td>{{ form_widget(form.descriptionevenement) }}</td>
+                                    <td>{{ form_errors(form.descriptionevenement) }}</td>
+                                </tr>
+                            </table>
+                                    
+                            <div>
+                                {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(form)}}</div>
+                            <ul class="record_actions" style="margin-left: 0px;">
+                                <li  style="list-style-type: none;">
+                                    <a href="{{ path('evenement') }}">
+                                    Liste des Evénements
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    
 {% endblock %}

@@ -1,15 +1,53 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Labs creation</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Creation de Laboratoire</h1>
 
-    {{ form(form) }}
+                        <form action="{{ path('labs_create') }}" method="post" {{ form_enctype(form) }}>
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(form.nomlab,'Nom')}}</td>
+                                    <td>{{ form_widget(form.nomlab) }}</td>
+                                    <td>{{ form_errors(form.nomlab) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.descriptionlab,'Description')}}</td>
+                                    <td>{{ form_widget(form.descriptionlab) }}</td>
+                                    <td>{{ form_errors(form.descriptionlab) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Cochez ci-dessous  les écoles qui proposent ce Laboratoire</td>
+                                </tr>
+                                {%for site in form.idsite%}
+                                <tr>  
+                                    <td>{{form_label(site)}} </td>
+                                    <td>{{form_widget(site)}}</td>
+                                    <td>&nbsp;</td>
+                                </tr>   
+                                 {%endfor%}
+                            </table>
+                                    
+                            <div>
+                                {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(form)}}</div>
+                         </form> 
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('labs') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+                        <ul class="record_actions" style="margin-left: 0px;">
+                                <li  style="list-style-type: none;">
+                                    <a href="{{ path('labs') }}">
+                                    Liste des Laboratoires
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    
 {% endblock %}
