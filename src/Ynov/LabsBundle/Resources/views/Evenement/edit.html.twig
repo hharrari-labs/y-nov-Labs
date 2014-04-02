@@ -20,7 +20,10 @@
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(edit_form.dateevenement,'Date')}}</td>
-                                    <td>{{ form_widget(edit_form.dateevenement) }}</td>
+                                    <td>{{ form_widget(edit_form.dateevenement.date.day, {'attr': {'style': 'width:50px'}}) }}
+                                        {{ form_widget(edit_form.dateevenement.date.month, {'attr': {'style': 'width:100px'}}) }}
+                                        {{ form_widget(edit_form.dateevenement.date.year, {'attr': {'style': 'width:62px'}}) }}
+                                    </td>
                                     <td>{{ form_errors(edit_form.dateevenement) }}</td>
                                 </tr>
                                 <tr>

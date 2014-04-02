@@ -1,15 +1,75 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Projet creation</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Creation d'un Projet</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('projet') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(form.idlab,'Laboratoire')}}</td>
+                                    <td>{{ form_widget(form.idlab) }}</td>
+                                    <td>{{ form_errors(form.idlab) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.nomprojet,'Nom')}}</td>
+                                    <td>{{ form_widget(form.nomprojet) }}</td>
+                                    <td>{{ form_errors(form.nomprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.equipe,'Equipe(nom, membres, rôles...)')}}</td>
+                                    <td>{{ form_widget(form.equipe) }}</td>
+                                    <td>{{ form_errors(form.equipe) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.lienprojet,'Lien (téléchargement ou page)')}}</td>
+                                    <td>{{ form_widget(form.lienprojet) }}</td>
+                                    <td>{{ form_errors(form.lienprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.videoprojet,'Vidéo (lien youtube)')}}</td>
+                                    <td>{{ form_widget(form.videoprojet) }}</td>
+                                    <td>{{ form_errors(form.videoprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.technologie,'Technologies')}}</td>
+                                    <td>{{ form_widget(form.technologie) }}</td>
+                                    <td>{{ form_errors(form.technologie) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.description,'Description')}}</td>
+                                    <td>{{ form_widget(form.description) }}</td>
+                                    <td>{{ form_errors(form.description) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.statutprojet,'Statut (%)')}}</td>
+                                    <td>{{ form_widget(form.statutprojet) }}</td>
+                                    <td>{{ form_errors(form.statutprojet) }}</td>
+                                </tr>
+                                 <tr>
+                                    <td>{{ form_label(form.file,'Logo')}}</td>
+                                    <td>{{ form_widget(form.file) }}</td>
+                                    <td>{{ form_errors(form.file) }}</td>
+                                </tr>
+                            </table>
+                                    
+                            <div>
+                                {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(form)}}</div>
+                            <ul class="record_actions" style="margin-left: 0px;">
+                                <li  style="list-style-type: none;">
+                                    <a href="{{ path('projet') }}">
+                                    Liste des Projets
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    
 {% endblock %}

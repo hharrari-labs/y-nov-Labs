@@ -5,6 +5,7 @@ namespace Ynov\LabsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class ProjetType extends AbstractType
 {
@@ -25,9 +26,14 @@ class ProjetType extends AbstractType
             ->add('equipe')
             ->add('lienprojet')
             ->add('logo')
+            ->add('file')
             ->add('idphoto')
-            ->add('idlab')
-            ->add('utiutilisateur')
+            ->add('idlab','entity', array(
+                  'class' => 'YnovLabsBundle:Labs',
+                  'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('l')
+                  ->orderBy('l.nomlab', 'ASC');
+                  },))
             ->add('idutilisateur')
         ;
     }

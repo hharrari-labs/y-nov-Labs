@@ -3,11 +3,12 @@
 namespace Ynov\LabsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Projet
  *
- * @ORM\Table(name="projet", indexes={@ORM\Index(name="FK_PROJET_ATTRIBUER_PHOTO", columns={"IDPHOTO"}), @ORM\Index(name="FK_PROJET_CONTENIR_LABS", columns={"IDLAB"}), @ORM\Index(name="FK_PROJET_CREER_UTILISAT", columns={"UTI_IDUTILISATEUR"}), @ORM\Index(name="FK_PROJET_DIRIGER_UTILISAT", columns={"IDUTILISATEUR"})})
+ * @ORM\Table(name="projet")
  * @ORM\Entity
  */
 class Projet
@@ -112,14 +113,10 @@ class Projet
     private $idlab;
 
     /**
-     * @var \Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="UTI_IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
-     * })
+     * @Assert\File(maxSize="6000000")
      */
-    private $utiutilisateur;
+    private $file;
+
 
     /**
      * @var \Utilisateur
@@ -420,29 +417,6 @@ class Projet
     }
 
     /**
-     * Set utiutilisateur
-     *
-     * @param \Ynov\LabsBundle\Entity\Utilisateur $utiutilisateur
-     * @return Projet
-     */
-    public function setUtiutilisateur(\Ynov\LabsBundle\Entity\Utilisateur $utiutilisateur = null)
-    {
-        $this->utiutilisateur = $utiutilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utiutilisateur
-     *
-     * @return \Ynov\LabsBundle\Entity\Utilisateur 
-     */
-    public function getUtiutilisateur()
-    {
-        return $this->utiutilisateur;
-    }
-
-    /**
      * Set idutilisateur
      *
      * @param \Ynov\LabsBundle\Entity\Utilisateur $idutilisateur
@@ -464,4 +438,74 @@ class Projet
     {
         return $this->idutilisateur;
     }
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    public function getAbsolutePath()
+    {
+        return null === $this->logo
+            ? null
+            : $this->getUploadRootDir().'/'.$this->logo;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->logo
+            ? null
+            : $this->getUploadDir().'/'.$this->logo;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory logo where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
+    }
+    public function upload()
+    {
+    // the file property can be empty if the field is not required
+    if (null === $this->getFile()) {
+        return;
+    }
+
+    // use the original file name here but you should
+    // sanitize it at least to avoid any security issues
+
+    // move takes the target directory and then the
+    // target filename to move to
+    $this->getFile()->move(
+        $this->getUploadRootDir(),
+        $this->getFile()->getClientOriginalName()
+    );
+
+    // set the logo property to the filename where you've saved the file
+    $this->logo = $this->getFile()->getClientOriginalName();
+
+    // clean up the file property as you won't need it anymore
+    $this->file = null;
+    }
+
 }
