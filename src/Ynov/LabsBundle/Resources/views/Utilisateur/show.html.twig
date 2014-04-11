@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Utilisateur</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -11,39 +11,28 @@
             </tr>
             <tr>
                 <th>Nomutilisateur</th>
-                <td>{{ entity.nomutilisateur }}</td>
+                <td>{{ entity.username }}</td>
             </tr>
             <tr>
-                <th>Membres</th>
-                <td>{{ entity.membres }}</td>
+                <th>Groupe</th>
+                <td>{{ entity.groupe }}</td>
             </tr>
             <tr>
-                <th>Goupe</th>
-                <td>{{ entity.goupe }}</td>
+                <th>Année d'étude</th>
+                <td>{{ entity.annee|date('Y') }}</td>
             </tr>
-            <tr>
-                <th>Annee</th>
-                <td>{{ entity.annee|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ entity.adresse }}</td>
-            </tr>
+ 
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('utilisateur') }}">
-            Back to the list
+            Liste des utilisateurs
         </a>
     </li>
     <li>
-        <a href="{{ path('utilisateur_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('utilisateur_profile', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

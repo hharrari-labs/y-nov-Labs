@@ -3,11 +3,12 @@
 namespace Ynov\LabsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Site
  *
- * @ORM\Table(name="site", indexes={@ORM\Index(name="FK_SITE_APPARTENI_ECOLE", columns={"IDECOLE"})})
+ * @ORM\Table(name="site")
  * @ORM\Entity
  */
 class Site
@@ -61,25 +62,26 @@ class Site
      *
      * @ORM\ManyToOne(targetEntity="Ecole")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDECOLE", referencedColumnName="IDECOLE")
+     *   @ORM\JoinColumn(name="IDECOLE", referencedColumnName="IDECOLE", nullable=false)
      * })
      */
     private $idecole;
+   
     /**
-     * @var \Labs
+     * @var Labs
      *
-     * @ORM\ManyToOne(targetEntity="Labs")
+     * @ORM\ManyToOne(targetEntity="Labs", inversedBy="sites", cascade={"persist","merge"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="IDLAB", referencedColumnName="IDLAB")
      * })
      */
     private $idlab;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="Labs", mappedBy="Site")
-//     */
-//    private $labs;
-    
+    /**
+     * @var ArrayCollection $labs
+     *
+     * @ORM\OneToMany(targetEntity="Ynov\LabsBundle\Entity\Labs", mappedBy="idsite", cascade={"persist", "remove", "merge"})
+     */
+    private $labs;
     /**
      * Get id
      *
@@ -227,15 +229,18 @@ class Site
     {
         return $this->idecole;
     }
+    public function __toString() {
+        return $this->getNomsite();
+    }
 
+
+    
     /**
-     * Get labs
-     *
-     * @return \Doctrine\Common\Collections\Collection 
+     * Constructor
      */
-    public function getLabs()
+    public function __construct()
     {
-        return $this->labs;
+        $this->labs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -260,7 +265,37 @@ class Site
     {
         return $this->idlab;
     }
-    public function __toString() {
-        return $this->getNomsite();
+
+    /**
+     * Add labs
+     *
+     * @param \Ynov\LabsBundle\Entity\Labs $labs
+     * @return Site
+     */
+    public function addLab(\Ynov\LabsBundle\Entity\Labs $labs)
+    {
+        $this->labs[] = $labs;
+
+        return $this;
+    }
+
+    /**
+     * Remove labs
+     *
+     * @param \Ynov\LabsBundle\Entity\Labs $labs
+     */
+    public function removeLab(\Ynov\LabsBundle\Entity\Labs $labs)
+    {
+        $this->labs->removeElement($labs);
+    }
+
+    /**
+     * Get labs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLabs()
+    {
+        return $this->labs;
     }
 }

@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ynov\LabsBundle\Entity\Labs;
 use Ynov\LabsBundle\Entity\Site;
-use Ynov\LabsBundle\Entity\Statut;
 use Ynov\LabsBundle\Form\LabsType;
 
 /**
@@ -37,20 +36,31 @@ class LabsController extends Controller
      */
     public function createAction(Request $request)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Labs();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $date = new DateTime("now", new DateTimeZone('Europe/Paris'));
+            $date = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
             $entity->setDatecreation($date);
             $entity->setDatemajlab($date);
             //$entity->setIdutilisateur($utilisateur);
+            $sites=$entity->getSites();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('labs_show', array('id' => $entity->getId())));
+            foreach($sites as $site){
+                $labsite= new \Ynov\LabsBundle\Entity\Labsites();
+                $labsite->setIdlab($entity);
+                $labsite->setIdsite($site);
+                $entity->setIdutilisateur($this->getUser());
+                $em->persist($labsite);
+                $em->flush();
+            }
+            return $this->redirect($this->generateUrl('labs'));
         }
 
         return $this->render('YnovLabsBundle:Labs:new.html.twig', array(
@@ -84,6 +94,9 @@ class LabsController extends Controller
      */
     public function newAction()
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Labs();
         $form   = $this->createCreateForm($entity);
 
@@ -99,6 +112,9 @@ class LabsController extends Controller
      */
     public function showAction($id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Labs')->find($id);
@@ -120,6 +136,9 @@ class LabsController extends Controller
      */
     public function editAction($id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Labs')->find($id);
@@ -127,7 +146,13 @@ class LabsController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Labs entity.');
         }
-
+        if($this->isDirlab() && $entity->getIdutilisateur()->getId()!=$this->getUser()->getId()){
+             return $this->redirect($this->generateUrl('labs'));
+        }
+        $labSitesEntities=$em->getRepository('YnovLabsBundle:Labsites')->findByidlab($id);
+        foreach($labSitesEntities as $labSitesEntity){
+            $entity->addSite($labSitesEntity->getIdsite());
+        }
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -165,16 +190,39 @@ class LabsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Labs')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Labs entity.');
         }
-
+        
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
+        
         if ($editForm->isValid()) {
+            
+            $sites=$entity->getSites();
+            $labSitesEntities=$em->getRepository('YnovLabsBundle:Labsites')->findByidlab($id);
+            foreach($labSitesEntities as $labSitesEntity){
+             $i=0;
+             foreach($sites as $site){
+                if($site->getId()==$labSitesEntity->getIdsite()->getId()){
+                    $sites->removeElement($site);
+                 $i+=1;
+                }
+             }
+             if($i==0){
+                 $em->remove($labSitesEntity);
+             }
+            }
+            foreach($sites as $site){
+                $labSite= new \Ynov\LabsBundle\Entity\Labsites();
+                $labSite->setIdlab($entity);
+                $labSite->setIdsite($site);
+                $em->persist($labSite);
+                $em->flush();
+             }
+            $date = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
+            $entity->setDatemajlab($date);
             $em->flush();
 
             return $this->redirect($this->generateUrl('labs_edit', array('id' => $id)));
@@ -192,6 +240,9 @@ class LabsController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

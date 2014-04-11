@@ -1,14 +1,115 @@
 {% extends '::base.html.twig' %}
-
 {% block body -%}
-    <h1>Projet edit</h1>
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        <h1>Creation d'un Projet</h1>
+                            {{ form_start(edit_form) }}
+                            <table class="table">
+                                <tr>
+                                    <td>{{ form_label(edit_form.idlab,'Laboratoire')}}</td>
+                                    <td>{{ form_widget(edit_form.idlab) }}</td>
+                                    <td>{{ form_errors(edit_form.idlab) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.nomprojet,'Nom')}}</td>
+                                    <td>{{ form_widget(edit_form.nomprojet) }}</td>
+                                    <td>{{ form_errors(edit_form.nomprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.equipe,'Equipe(nom, membres, rôles...)')}}</td>
+                                    <td>{{ form_widget(edit_form.equipe) }}</td>
+                                    <td>{{ form_errors(edit_form.equipe) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.lienprojet,'Lien (téléchargement ou page)')}}</td>
+                                    <td>{{ form_widget(edit_form.lienprojet) }}</td>
+                                    <td>{{ form_errors(edit_form.lienprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.videoprojet,'Vidéo (lien youtube)')}}</td>
+                                    <td>{{ form_widget(edit_form.videoprojet) }}</td>
+                                    <td>{{ form_errors(edit_form.videoprojet) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.technologie,'Technologies')}}</td>
+                                    <td>{{ form_widget(edit_form.technologie) }}</td>
+                                    <td>{{ form_errors(edit_form.technologie) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.description,'Description')}}</td>
+                                    <td>{{ form_widget(edit_form.description) }}</td>
+                                    <td>{{ form_errors(edit_form.description) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.statutprojet,'Statut (%)')}}</td>
+                                    <td>{{ form_widget(edit_form.statutprojet) }}</td>
+                                    <td>{{ form_errors(edit_form.statutprojet) }}</td>
+                                </tr>
+                                 <tr>
+                                    <td>{{ form_label(edit_form.file,'Logo')}}</td>
+                                    <td>{{ form_widget(edit_form.file) }}</td>
+                                    <td>{{ edit_form.vars.value.logo }}{{ form_errors(edit_form.file) }}</td>
+                                </tr>
+                            </table>
+                            <h3>Ajoutez des photos à ce projet</h3>  
+                            <ul class="photos" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
+                                {% for photo in edit_form.photos %}
+                                    <li>{{ form_row(photo.file) }} <img src="{{ asset(photo.vars.value.path) }}"/></li>
+                                
+                                {% endfor %}
+                            </ul>
+                            <div>
+                                {{ form_widget(edit_form.submit, { 'label': 'Soumettre' })}}
+                            </div>
+                            <div class="hidden">{{ form_rest(edit_form)}}</div>
+                            {{ form_end(edit_form) }} 
+                            <ul class="record_actions" style="margin-left: 0px;">
+                                <li>
+                                    <a href="{{ path('projet') }}">
+                                    Liste des Projets
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                    </div>
+            </div>
+    </div>
+    </section>
+    <script>
+    // Récupère le div qui contient la collection de photos
+    var collectionHolder = $('ul.photos');
 
-    {{ form(edit_form) }}
+    // ajoute un lien « add a tag »
+    var $addPhotoLink = $('<a href="#" class="add_tag_link">Ajouter une photo</a>');
+    var $newLinkLi = $('<li></li>').append($addPhotoLink);
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('projet') }}">
-            Back to the list
+    jQuery(document).ready(function() {
+        // ajoute l'ancre « ajouter un tag » et li à la balise ul
+        collectionHolder.append($newLinkLi);
+
+        $addPhotoLink.on('click', function(e) {
+            // empêche le lien de créer un « # » dans l'URL
+            e.preventDefault();
+
+            // ajoute un nouveau formulaire photo
+            addPhotoForm(collectionHolder, $newLinkLi);
+        });
+    });
+    function addPhotoForm(collectionHolder, $newLinkLi) {
+        // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
+        var prototype = collectionHolder.attr('data-prototype');
+
+        // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+        // la longueur de la collection courante
+        var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+        // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un photo"
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+    </script>
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

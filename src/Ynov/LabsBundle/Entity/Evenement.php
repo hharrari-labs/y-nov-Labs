@@ -3,11 +3,13 @@
 namespace Ynov\LabsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Evenement
  *
- * @ORM\Table(name="evenement", indexes={@ORM\Index(name="FK_EVENEMEN_CREER2_UTILISAT", columns={"IDUTILISATEUR"})})
+ * @ORM\Table(name="evenement")
  * @ORM\Entity
  */
 class Evenement
@@ -87,7 +89,7 @@ class Evenement
      *
      * @return integer 
      */
-    public function getI()
+    public function getId()
     {
         return $this->id;
     }

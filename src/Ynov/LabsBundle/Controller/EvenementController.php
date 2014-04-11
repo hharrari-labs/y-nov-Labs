@@ -35,6 +35,9 @@ class EvenementController extends Controller
      */
     public function createAction(Request $request)
     {
+        if(!$this->isAdmin() && !$this->isDirlab()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Evenement();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -78,6 +81,9 @@ class EvenementController extends Controller
      */
     public function newAction()
     {
+        if(!$this->isAdmin() && !$this->isDirlab()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Evenement();
         $form   = $this->createCreateForm($entity);
 
@@ -114,6 +120,9 @@ class EvenementController extends Controller
      */
     public function editAction($id)
     {
+        if(!$this->isAdmin() && !$this->isDirlab()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Evenement')->find($id);
@@ -121,7 +130,9 @@ class EvenementController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Evenement entity.');
         }
-
+        if($this->isDirlab() && $entity->getIdutilisateur()->getId()!=$this->getUser()->getId()){
+             return $this->redirect($this->generateUrl('evenement'));
+        }
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -156,6 +167,9 @@ class EvenementController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        if(!$this->isAdmin() && !$this->isDirlab()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Evenement')->find($id);
@@ -186,6 +200,9 @@ class EvenementController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if(!$this->isAdmin() &&!$this->isDirlab()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

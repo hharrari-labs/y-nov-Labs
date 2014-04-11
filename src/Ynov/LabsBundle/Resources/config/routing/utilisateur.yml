@@ -28,3 +28,6 @@ utilisateur_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "YnovLabsBundle:Utilisateur:delete" }
     requirements: { _method: post|delete }
+utilisateur_profile:
+    pattern:  /{id}/profile
+    defaults: { _controller: "YnovLabsBundle:Utilisateur:profile" }

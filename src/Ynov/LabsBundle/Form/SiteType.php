@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+
 class SiteType extends AbstractType
 {
         /**
@@ -26,9 +27,12 @@ class SiteType extends AbstractType
                   return $er->createQueryBuilder('e')
                   ->orderBy('e.nomecole', 'ASC');
                   },))
-            ->add('idlab','entity', array(
+            ->add('labs','entity', array(
                   'class' => 'YnovLabsBundle:Labs',
-                  'property' => 'nomlab',
+                  'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('l')
+                  ->orderBy('l.nomlab', 'ASC');
+                  },
                   'expanded' => true,
                   'multiple' =>true,
                   'required'    => true,

@@ -62,7 +62,7 @@
             <div class="navbar-inner">
                     <div class="container">
                             <!-- logo -->
-                            <a class="brand logo" href="{{ path('ynov_labs_homepage') }}">
+                            <a class="brand logo" href="{{ path('accueil') }}">
                             <img src="{{ asset('img/logo.png') }}" alt="" />
                             </a>
                             <!-- end logo -->
@@ -71,7 +71,7 @@
                                     <nav>
                                         <ul class="nav topnav">
                                                 <li class="dropdown success active">
-                                                    <a href="{{ path('ynov_labs_homepage') }}"><i class="icon-home icon-white"></i> Accueil</a>
+                                                    <a href="{{ path('accueil') }}"><i class="icon-home icon-white"></i> Accueil</a>
                                                 </li>
                                                 <li class="dropdown primary">
                                                     <a href="{{ path('labs') }}"><i class="icon-star icon-white"></i> Labos</a>
@@ -96,7 +96,17 @@
             </div>
     </div>
 </header><br /><br /><br />
-    <section id="">{% block body %}{% endblock %}</section>  
+    <section id="">{% block body %}
+  {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+  {% for key, message in app.session.flashbag.all() %}
+    <div class="alert alert-{{ key }}">
+      {{ message|trans({}, 'FOSUserBundle') }}
+    </div>
+  {% endfor %}
+
+  {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
+  {% block fos_user_content %}
+  {% endblock fos_user_content %}{% endblock %}</section>  
 <footer class="footer">
             <div class="container">
                     <div class="row">

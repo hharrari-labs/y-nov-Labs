@@ -3,17 +3,17 @@
 {% block body -%}
     <h1>Evenement list</h1>
 
-    <table class="records_list">
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Lieu</th>
-                <th>Dateevenement</th>
-                <th>Datecreation</th>
-                <th>Lienevenement</th>
-                <th>Descriptionevenement</th>
-                <th>Datemajevenement</th>
+                <th>Date</th>
+                <th>Date de création</th>
+                <th>Lien(page,vidéo, photo)</th>
+                <th>Description</th>
+                <th>Date de maj</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -33,9 +33,11 @@
                     <li>
                         <a href="{{ path('evenement_show', { 'id': entity.id }) }}">show</a>
                     </li>
+                {%if(app.user.getGroupe()=="Admin" or (app.user.getGroupe()=="DirLab" and entity.idutilisateur.getId()==app.user.id))%}
                     <li>
                         <a href="{{ path('evenement_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
+                {%endif%}
                 </ul>
                 </td>
             </tr>

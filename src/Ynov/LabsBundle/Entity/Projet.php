@@ -5,11 +5,14 @@ namespace Ynov\LabsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Projet
  *
  * @ORM\Table(name="projet")
  * @ORM\Entity
+ * @UniqueEntity(fields={"nomprojet","lienprojet"}, message="Ce projet existe déjà")
  */
 class Projet
 {
@@ -93,14 +96,11 @@ class Projet
     private $logo;
 
     /**
-     * @var \Photo
+     * @var ArrayCollection $photos
      *
-     * @ORM\ManyToOne(targetEntity="Photo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDPHOTO", referencedColumnName="IDPHOTO")
-     * })
+     * @ORM\OneToMany(targetEntity="Ynov\LabsBundle\Entity\Photo", mappedBy="idprojet", cascade={"persist", "remove", "merge"})
      */
-    private $idphoto;
+    private $photos;
 
     /**
      * @var \Labs
@@ -367,30 +367,7 @@ class Projet
      */
     public function getLogo()
     {
-        return $this->logo;
-    }
-
-    /**
-     * Set idphoto
-     *
-     * @param \Ynov\LabsBundle\Entity\Photo $idphoto
-     * @return Projet
-     */
-    public function setIdphoto(\Ynov\LabsBundle\Entity\Photo $idphoto = null)
-    {
-        $this->idphoto = $idphoto;
-
-        return $this;
-    }
-
-    /**
-     * Get idphoto
-     *
-     * @return \Ynov\LabsBundle\Entity\Photo 
-     */
-    public function getIdphoto()
-    {
-        return $this->idphoto;
+        return $this->getWebPath();
     }
 
     /**
@@ -508,4 +485,44 @@ class Projet
     $this->file = null;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add photos
+     *
+     * @param \Ynov\LabsBundle\Entity\Photo $photos
+     * @return Projet
+     */
+    public function addPhoto(\Ynov\LabsBundle\Entity\Photo $photos)
+    {
+        $this->photos[] = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     *
+     * @param \Ynov\LabsBundle\Entity\Photo $photos
+     */
+    public function removePhoto(\Ynov\LabsBundle\Entity\Photo $photos)
+    {
+        $this->photos->removeElement($photos);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
 }

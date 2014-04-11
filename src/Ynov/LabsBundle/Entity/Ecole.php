@@ -3,12 +3,13 @@
 namespace Ynov\LabsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Ecole
  *
  * @ORM\Table(name="ecole")
  * @ORM\Entity
+ * @UniqueEntity(fields="nomecole", message="Cette école existe déjà")
  */
 class Ecole
 {
@@ -91,5 +92,8 @@ class Ecole
     public function getDatecreation()
     {
         return $this->datecreation;
+    }
+    public function __toString() {
+        return $this->getNomecole();
     }
 }

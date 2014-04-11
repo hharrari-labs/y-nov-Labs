@@ -7,6 +7,7 @@
                     <div class="span12">
                         <h1>Creation d'un groupe d'Ecoles</h1>
 
+                        <form action="{{ path('ecole_create') }}" method="post" {{ form_enctype(form) }}>
                             <table class="table">
                                 <tr>
                                     <td>{{ form_label(form.nomecole,'Nom')}}</td>
@@ -19,7 +20,8 @@
                                 {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
                             </div>
                             <div class="hidden">{{ form_rest(form)}}</div>
-s
+                         </form> 
+
                         <ul class="record_actions" style="margin-left: 0px;">
                                 <li  style="list-style-type: none;">
                                     <a href="{{ path('ecole') }}">

@@ -18,23 +18,23 @@
                 <td>{{ entity.lieu }}</td>
             </tr>
             <tr>
-                <th>Dateevenement</th>
+                <th>Date de l'évenement</th>
                 <td>{{ entity.dateevenement|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Datecreation</th>
+                <th>Date de creation</th>
                 <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Lienevenement</th>
+                <th>Lien (Vidéo, page, Photo)</th>
                 <td>{{ entity.lienevenement }}</td>
             </tr>
             <tr>
-                <th>Descriptionevenement</th>
+                <th>Description</th>
                 <td>{{ entity.descriptionevenement }}</td>
             </tr>
             <tr>
-                <th>Datemajevenement</th>
+                <th>Date de maj</th>
                 <td>{{ entity.datemajevenement|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
@@ -43,14 +43,16 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('evenement') }}">
-            Back to the list
+            Liste de événements
         </a>
     </li>
+{%if(app.user.getGroupe()=="Admin" or (app.user.getGroupe()=="DirLab" and entity.idutilisateur.getId()==app.user.id))%}
     <li>
         <a href="{{ path('evenement_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
+{%endif%}
 </ul>
 {% endblock %}

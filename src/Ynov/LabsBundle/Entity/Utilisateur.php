@@ -3,14 +3,16 @@
 namespace Ynov\LabsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use FOS\UserBundle\Entity\User as BaseUser;
 /**
  * Utilisateur
  *
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity
+ * @UniqueEntity(fields="username", message="Cet utilisateur existe déjà")
  */
-class Utilisateur
+class Utilisateur extends BaseUser
 {
     /**
      * @var integer
@@ -19,28 +21,14 @@ class Utilisateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
-    /**
+     /**
      * @var string
      *
-     * @ORM\Column(name="NOMUTILISATEUR", type="string", length=50, nullable=true)
+     * @ORM\Column(name="GROUPE", type="string", length=20, nullable=true)
      */
-    private $nomutilisateur;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="MEMBRES", type="string", length=500, nullable=true)
-     */
-    private $membres;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="GOUPE", type="string", length=20, nullable=true)
-     */
-    private $goupe;
+    private $groupe;
 
     /**
      * @var \DateTime
@@ -50,86 +38,25 @@ class Utilisateur
     private $annee;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="PASSWORD", type="string", length=20, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ADRESSE", type="string", length=250, nullable=true)
-     */
-    private $adresse;
-
-
-
-    /**
      * Get id
      *
      * @return integer 
      */
-    public function getI()
+    public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set nomutilisateur
-     *
-     * @param string $nomutilisateur
-     * @return Utilisateur
-     */
-    public function setNomutilisateur($nomutilisateur)
-    {
-        $this->nomutilisateur = $nomutilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get nomutilisateur
-     *
-     * @return string 
-     */
-    public function getNomutilisateur()
-    {
-        return $this->nomutilisateur;
-    }
-
-    /**
-     * Set membres
-     *
-     * @param string $membres
-     * @return Utilisateur
-     */
-    public function setMembres($membres)
-    {
-        $this->membres = $membres;
-
-        return $this;
-    }
-
-    /**
-     * Get membres
-     *
-     * @return string 
-     */
-    public function getMembres()
-    {
-        return $this->membres;
-    }
-
+   
     /**
      * Set goupe
      *
-     * @param string $goupe
+     * @param string $groupe
      * @return Utilisateur
      */
-    public function setGoupe($goupe)
+    public function setGroupe($groupe)
     {
-        $this->goupe = $goupe;
+        $this->groupe = $groupe;
 
         return $this;
     }
@@ -139,9 +66,9 @@ class Utilisateur
      *
      * @return string 
      */
-    public function getGoupe()
+    public function getGroupe()
     {
-        return $this->goupe;
+        return $this->groupe;
     }
 
     /**
@@ -167,49 +94,5 @@ class Utilisateur
         return $this->annee;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Utilisateur
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set adresse
-     *
-     * @param string $adresse
-     * @return Utilisateur
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string 
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
+   
 }

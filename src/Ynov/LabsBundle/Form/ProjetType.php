@@ -27,7 +27,11 @@ class ProjetType extends AbstractType
             ->add('lienprojet')
             ->add('logo')
             ->add('file')
-            ->add('idphoto')
+            ->add('photos','collection',array(
+                  'type' => new PhotoType(),
+                  'allow_add' => true,
+                  'by_reference' => false,
+                    ))
             ->add('idlab','entity', array(
                   'class' => 'YnovLabsBundle:Labs',
                   'query_builder' => function(EntityRepository $er) {

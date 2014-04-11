@@ -1,8 +1,8 @@
+# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    #database_host: 'http://serveur.zman-officiel.com'
-    database_host: '127.0.0.1'
-    database_port: 
+    database_host: 127.0.0.1
+    database_port: null
     database_name: y-nov-labs
     database_user: root
     database_password: null
@@ -12,4 +12,3 @@ parameters:
     mailer_password: null
     locale: fr
     secret: 54423d9ed4813efdc643307598a849c9
-    database_path: null

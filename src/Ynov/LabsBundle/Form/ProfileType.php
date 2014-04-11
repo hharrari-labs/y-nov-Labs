@@ -5,8 +5,9 @@ namespace Ynov\LabsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
-class StatutType extends AbstractType
+class ProfileType extends BaseType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -14,11 +15,11 @@ class StatutType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+        
         $builder
-            ->add('date')
-            ->add('actif')
-            ->add('idsite')
-            ->add('idlab')
+            ->add('groupe','choice', array('choices' => array('Admin' => 'Admin','Chef de projet'=>'Chef de projet', 'DirLab' => 'DirLab'),'label'=>'Groupe:'))
+            ->add('annee','date',array('label'=>'Année scolaire:'))
         ;
     }
     
@@ -28,7 +29,7 @@ class StatutType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ynov\LabsBundle\Entity\Statut'
+            'data_class' => 'Ynov\LabsBundle\Entity\Utilisateur'
         ));
     }
 
@@ -37,6 +38,6 @@ class StatutType extends AbstractType
      */
     public function getName()
     {
-        return 'ynov_labsbundle_statut';
+        return 'ynov_labsbundle_profile';
     }
 }

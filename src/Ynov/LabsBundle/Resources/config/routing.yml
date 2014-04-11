@@ -1,4 +1,4 @@
-ynov_labs_homepage:
+accueil:
     pattern:  /accueil
     defaults: { _controller: YnovLabsBundle:Default:index }
     

@@ -255,4 +255,22 @@ class Controller extends ContainerAware
     {
         return $this->container->get($id);
     }
+    public function isAdmin(){
+        if($this->getUser()!=null && $this->getUser()->getGroupe()==="Admin"){
+            return true;
+        }
+        return false;
+    }
+    public function isDirlab(){
+        if($this->getUser()!=null && $this->getUser()->getGroupe()==="DirLab"){
+            return true;
+        }
+        return false;
+    }
+    public function isChefprojet(){
+        if($this->getUser()!=null && $this->getUser()->getGroupe()==="Chef de projet"){
+            return true;
+        }
+        return false;
+    }
 }

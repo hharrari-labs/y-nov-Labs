@@ -22,7 +22,7 @@
                                 <tr>
                                     <td colspan="3">Cochez ci-dessous  les écoles qui proposent ce Laboratoire</td>
                                 </tr>
-                                {%for site in form.idsite%}
+                                {%for site in form.sites%}
                                 <tr>  
                                     <td>{{form_label(site)}} </td>
                                     <td>{{form_widget(site)}}</td>

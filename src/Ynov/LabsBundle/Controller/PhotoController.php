@@ -21,6 +21,9 @@ class PhotoController extends Controller
      */
     public function indexAction()
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('YnovLabsBundle:Photo')->findAll();
@@ -35,6 +38,9 @@ class PhotoController extends Controller
      */
     public function createAction(Request $request)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Photo();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -78,6 +84,9 @@ class PhotoController extends Controller
      */
     public function newAction()
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Photo();
         $form   = $this->createCreateForm($entity);
 
@@ -93,6 +102,9 @@ class PhotoController extends Controller
      */
     public function showAction($id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Photo')->find($id);
@@ -114,6 +126,9 @@ class PhotoController extends Controller
      */
     public function editAction($id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Photo')->find($id);
@@ -156,6 +171,9 @@ class PhotoController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Photo')->find($id);
@@ -186,6 +204,9 @@ class PhotoController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if(!$this->isAdmin()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

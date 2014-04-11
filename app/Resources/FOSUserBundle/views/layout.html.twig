@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                        {% block fos_user_content %}
+                        {% endblock fos_user_content %}
+                    </div>
+            </div>
+    </div>
+    </section>
+    
+{% endblock %}
+

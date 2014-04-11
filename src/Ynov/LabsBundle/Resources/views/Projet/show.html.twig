@@ -3,22 +3,22 @@
 {% block body -%}
     <h1>Projet</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Nomprojet</th>
+                <th>Nom</th>
                 <td>{{ entity.nomprojet }}</td>
             </tr>
             <tr>
-                <th>Statutprojet</th>
+                <th>Statut</th>
                 <td>{{ entity.statutprojet }}</td>
             </tr>
             <tr>
-                <th>Videoprojet</th>
+                <th>Video</th>
                 <td>{{ entity.videoprojet }}</td>
             </tr>
             <tr>
@@ -26,11 +26,11 @@
                 <td>{{ entity.description }}</td>
             </tr>
             <tr>
-                <th>Datecreation</th>
+                <th>Date de création</th>
                 <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Datemajprojet</th>
+                <th>Date de maj</th>
                 <td>{{ entity.datemajprojet|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
@@ -42,7 +42,7 @@
                 <td>{{ entity.equipe }}</td>
             </tr>
             <tr>
-                <th>Lienprojet</th>
+                <th>Lien( page ou téléchargement)</th>
                 <td>{{ entity.lienprojet }}</td>
             </tr>
             <tr>
@@ -51,18 +51,19 @@
             </tr>
         </tbody>
     </table>
-
         <ul class="record_actions">
     <li>
         <a href="{{ path('projet') }}">
             Back to the list
         </a>
     </li>
+{%if(app.user.getGroupe()=="Admin" or app.user.getGroupe()=="DirLab" or (app.user.getGroupe()=="Chef de projet" and entity.idutilisateur.getId()==app.user.id) )%}
     <li>
         <a href="{{ path('projet_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
+{%endif%}
 </ul>
 {% endblock %}

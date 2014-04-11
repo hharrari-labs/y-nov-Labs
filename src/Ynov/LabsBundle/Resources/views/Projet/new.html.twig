@@ -6,7 +6,7 @@
             <div class="row">
                     <div class="span12">
                         <h1>Creation d'un Projet</h1>
-
+                           <form action="{{ path('projet_create') }}" method="post" {{ form_enctype(form) }}>
                             <table class="table">
                                 <tr>
                                     <td>{{ form_label(form.idlab,'Laboratoire')}}</td>
@@ -54,13 +54,19 @@
                                     <td>{{ form_errors(form.file) }}</td>
                                 </tr>
                             </table>
-                                    
+                            <h3>Ajoutez des photos à ce projet</h3>  
+                            <ul class="photos" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+                                {% for photo in form.photos %}
+                                <li>{{ form_row(photo.file) }}</li>
+                                {% endfor %}
+                            </ul>
                             <div>
                                 {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
                             </div>
                             <div class="hidden">{{ form_rest(form)}}</div>
+                           </form>
                             <ul class="record_actions" style="margin-left: 0px;">
-                                <li  style="list-style-type: none;">
+                                <li>
                                     <a href="{{ path('projet') }}">
                                     Liste des Projets
                                     </a>
@@ -71,5 +77,37 @@
             </div>
     </div>
     </section>
-    
+    <script>
+    // Récupère le div qui contient la collection de photos
+    var collectionHolder = $('ul.photos');
+
+    // ajoute un lien « add a tag »
+    var $addPhotoLink = $('<a href="#" class="add_tag_link">Ajouter une photo</a>');
+    var $newLinkLi = $('<li></li>').append($addPhotoLink);
+
+    jQuery(document).ready(function() {
+        // ajoute l'ancre « ajouter un tag » et li à la balise ul
+        collectionHolder.append($newLinkLi);
+
+        $addPhotoLink.on('click', function(e) {
+            // empêche le lien de créer un « # » dans l'URL
+            e.preventDefault();
+
+            // ajoute un nouveau formulaire photo
+            addPhotoForm(collectionHolder, $newLinkLi);
+        });
+    });
+    function addPhotoForm(collectionHolder, $newLinkLi) {
+        // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
+        var prototype = collectionHolder.attr('data-prototype');
+
+        // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+        // la longueur de la collection courante
+        var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+        // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un photo"
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+    </script>
 {% endblock %}

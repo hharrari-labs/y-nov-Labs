@@ -53,47 +53,14 @@
     {% endfor %}
   </div>
 </section>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nomlab</th>
-                <th>Datecreation</th>
-                <th>Codecouleur</th>
-                <th>Datemajlab</th>
-                <th>Descriptionlab</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('labs_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nomlab }}</td>
-                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.codecouleur }}</td>
-                <td>{% if entity.datemajlab %}{{ entity.datemajlab|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.descriptionlab }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('labs_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('labs_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-        <ul>
+    {%if(app.user.getGroupe()=="Admin" or app.user.getGroupe()=="DirLab")%}
+    <ul>
         <li>
             <a href="{{ path('labs_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
+    {%endif%}
     {% endblock %}

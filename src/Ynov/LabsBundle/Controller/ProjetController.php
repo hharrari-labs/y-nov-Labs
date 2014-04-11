@@ -35,16 +35,32 @@ class ProjetController extends Controller
      */
     public function createAction(Request $request)
     {
+        if(!$this->isAdmin() && !$this->isDirlab() && !$this->isChefprojet()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Projet();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if($entity->getFile()!=null){
+                $entity->upload();
+            }
+            if($entity->getPhotos()->count()>0){
+                foreach ($entity->getPhotos() as $photo){
+                   $photo->upload();
+                   $photo->setIdprojet($entity);
+                }
+            }
+            $date = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
+            $entity->setDatecreation($date);
+            $entity->setDatemajprojet($date);
+            $entity->setIdutilisateur($this->getUser());
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('projet_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('projet'));
         }
 
         return $this->render('YnovLabsBundle:Projet:new.html.twig', array(
@@ -78,6 +94,9 @@ class ProjetController extends Controller
      */
     public function newAction()
     {
+        if(!$this->isAdmin() && !$this->isDirlab() && !$this->isChefprojet()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
         $entity = new Projet();
         $form   = $this->createCreateForm($entity);
 
@@ -114,14 +133,20 @@ class ProjetController extends Controller
      */
     public function editAction($id)
     {
+        if(!$this->isAdmin() && !$this->isDirlab() && !$this->isChefprojet()){
+             return $this->redirect($this->generateUrl('accueil'));
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Projet')->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Projet entity.');
         }
-
+        if($this->isChefprojet() && $entity->getIdutilisateur()->getId()!=$this->getUser()->getId()){
+             return $this->redirect($this->generateUrl('projet'));
+        }
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -169,9 +194,18 @@ class ProjetController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if($entity->getPhotos()->count()>1){
+                foreach ($entity->getPhotos() as $photo){
+                   $photo->upload();
+                   $photo->setIdprojet($entity);
+                }
+            }
+            $date = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
+            $entity->setDatemajprojet($date);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('projet_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('projet'));
         }
 
         return $this->render('YnovLabsBundle:Projet:edit.html.twig', array(

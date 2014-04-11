@@ -3,46 +3,44 @@
 {% block body -%}
     <h1>Labs</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Nomlab</th>
+                <th>Nom</th>
                 <td>{{ entity.nomlab }}</td>
             </tr>
             <tr>
-                <th>Datecreation</th>
+                <th>Date de creation</th>
                 <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Codecouleur</th>
-                <td>{{ entity.codecouleur }}</td>
-            </tr>
-            <tr>
-                <th>Datemajlab</th>
+                <th>Date maj</th>
                 <td>{{ entity.datemajlab|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Descriptionlab</th>
+                <th>Description</th>
                 <td>{{ entity.descriptionlab }}</td>
             </tr>
         </tbody>
     </table>
 
-        <ul class="record_actions">
+ <ul class="record_actions">
     <li>
         <a href="{{ path('labs') }}">
             Back to the list
         </a>
     </li>
+{%if(app.user.getGroupe()=="Admin" or (app.user.getGroupe()=="DirLab" and entity.idutilisateur.getId()==app.user.id))%}
     <li>
         <a href="{{ path('labs_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
+{%endif%}
 </ul>
 {% endblock %}

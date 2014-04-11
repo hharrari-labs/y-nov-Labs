@@ -5,3 +5,14 @@ services:
 #    ynov_labs.example:
 #        class: %ynov_labs.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+# src/Acme/UserBundle/Resources/config/services.yml
+    ynov_labsbundle_utilisateur.type:
+        class: Ynov\LabsBundle\Form\UtilisateurType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ynov_labsbundle_utilisateur }
+    ynov_labsbundle_profile.type:
+        class: Ynov\LabsBundle\Form\ProfileType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ynov_labsbundle_profile }

@@ -5,8 +5,8 @@ namespace Ynov\LabsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-class UtilisateurType extends AbstractType
+use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+class UtilisateurType extends BaseType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -14,13 +14,11 @@ class UtilisateurType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+        
         $builder
-            ->add('nomutilisateur')
-            ->add('membres')
-            ->add('goupe')
-            ->add('annee')
-            ->add('password')
-            ->add('adresse')
+            ->add('groupe','choice', array('choices' => array('Admin' => 'Admin','Chef de projet'=>'Chef de projet', 'DirLab' => 'DirLab'),'label'=>'Groupe:'))
+            ->add('annee','date',array('label'=>'Année scolaire:'))
         ;
     }
     

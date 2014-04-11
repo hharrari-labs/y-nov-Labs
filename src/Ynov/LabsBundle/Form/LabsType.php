@@ -5,7 +5,7 @@ namespace Ynov\LabsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
+use Doctrine\ORM\EntityRepository;
 class LabsType extends AbstractType
 {
         /**
@@ -17,13 +17,16 @@ class LabsType extends AbstractType
         $builder
             ->add('nomlab')
             ->add('datecreation')
-            ->add('codecouleur')
+//            ->add('codecouleur')
             ->add('datemajlab')
             ->add('descriptionlab')
             ->add('idutilisateur')
-            ->add('idsite','entity', array(
+            ->add('sites','entity', array(
                   'class' => 'YnovLabsBundle:Site',
-                  'property' => 'nomsite',
+                  'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('s')
+                  ->orderBy('s.nomsite', 'ASC');
+                  },
                   'expanded' => true,
                   'multiple' =>true,
                   'required'    => true,

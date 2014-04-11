@@ -6,8 +6,9 @@
             <div class="row">
                     <div class="span12">
                         <h1>Creation d'une école</h1>
-
+                            {{ form_start(form) }}
                             <table class="table">
+                                
                                 <tr>
                                     <td>{{ form_label(form.idecole,'Ecole')}}</td>
                                     <td>{{ form_widget(form.idecole) }}</td>
@@ -36,7 +37,7 @@
                                 <tr>
                                     <td colspan="3">Cochez ci-dessous les Laboratoires proposés dans cette école</td>
                                 </tr>
-                                {%for lab in form.idlab%}
+                                {%for lab in form.labs%}
                                 <tr>  
                                     <td>{{form_label(lab)}} </td>
                                     <td>{{form_widget(lab)}}</td>
@@ -49,7 +50,7 @@
                                 {{ form_widget(form.submit, { 'label': 'Soumettre' })}}
                             </div>
                             <div class="hidden">{{ form_rest(form)}}</div>
-
+                            {{ form_end(form) }} 
                             <ul class="record_actions" style="margin-left: 0px;">
                                 <li  style="list-style-type: none;">
                                     <a href="{{ path('site') }}">
