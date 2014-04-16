@@ -290,4 +290,5 @@ class Labs
     {
         return $this->idsite;
     }
+    
 }

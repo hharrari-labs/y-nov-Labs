@@ -1,6 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+        <script type="text/javascript">
+        $(".ff").each(function(){
+            $(".ff").removeClass('active');
+        })
+        $(".Labos").addClass('active');
+    </script>
     <h1>Labs</h1>
 
     <table class="table">

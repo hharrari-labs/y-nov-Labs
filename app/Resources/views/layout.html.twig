@@ -45,7 +45,7 @@
     {% endblock %}
     
     <!-- fav and touch icons -->
-    {% block iconeLogo %}
+   {% block iconeLogo %}
     <link rel="shortcut icon" href="ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('ico/apple-touch-icon-144-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('ico/apple-touch-icon-114-precomposed.png')}}">
@@ -63,29 +63,29 @@
                     <div class="container">
                             <!-- logo -->
                             <a class="brand logo" href="{{ path('accueil') }}">
-                            <img src="{{ asset('img/logo.png') }}" alt="" />
+                            <img src="{{ asset('img/logo_labo.png') }}" alt="" />
                             </a>
                             <!-- end logo -->
                             <!-- top menu -->
                             <div>
                                     <nav>
                                         <ul class="nav topnav">
-                                                <li class="dropdown success active">
+                                                <li class="dropdown success ff Accueil">
                                                     <a href="{{ path('accueil') }}"><i class="icon-home icon-white"></i> Accueil</a>
                                                 </li>
-                                                <li class="dropdown primary">
+                                                <li class="dropdown primary ff Labos">
                                                     <a href="{{ path('labs') }}"><i class="icon-star icon-white"></i> Labos</a>
                                                 </li>
-                                                <li class="dropdown danger">
+                                                <li class="dropdown danger ff Projets">
                                                     <a href="{{ path('projet') }}"><i class="icon-leaf icon-white"></i> Projets</a>
                                                 </li>
-                                                <li class="dropdown warning">
+                                                <li class="dropdown warning ff Evenements">
                                                     <a href="{{ path('evenement') }}"><i class="icon-camera icon-white"></i> Evenements</a>
                                                 </li>
-                                                <li class="dropdown info">
+                                                <li class="dropdown info ff Connexion">
                                                     <a href="{{ path('contact') }}"><i class="icon-bullhorn icon-white"></i> Connexion</a>
                                                 </li>
-                                                <li class="inverse">
+                                                <li class="inverse ff Contact">
                                                     <a href="{{ path('contact') }}"><i class="icon-envelope icon-white"></i> Contact</a>
                                                 </li>
                                         </ul>
@@ -95,8 +95,9 @@
                     </div>
             </div>
     </div>
-</header><br /><br /><br />
-    <section id="">{% block body %}
+</header><br/><br/><br/>
+    <section id="">
+  {% block body %}
   {# On affiche les messages flash que définissent les contrôleurs du bundle #}
   {% for key, message in app.session.flashbag.all() %}
     <div class="alert alert-{{ key }}">
@@ -106,7 +107,9 @@
 
   {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
   {% block fos_user_content %}
-  {% endblock fos_user_content %}{% endblock %}</section>  
+  {% endblock fos_user_content %}{% endblock %}
+  
+    </section>   
 <footer class="footer">
             <div class="container">
                     <div class="row">

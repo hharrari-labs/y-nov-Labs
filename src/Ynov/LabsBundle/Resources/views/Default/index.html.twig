@@ -8,15 +8,22 @@
 {% endblock %}
 {% block body -%}
     <br />
+        
+        <script type="text/javascript">
+        $(".ff").each(function(){
+            $(".ff").removeClass('active');
+        })
+        $(".Accueil").addClass('active');
+            </script>
     <section id="intro">
     <div class="jumbotron masthead">
     <div class="container">
 		<div class="row">
 			<div class="span12" >
 				<div class="camera_wrap camera_black_skin" id="camera_wrap_2">
-					<div data-thumb="{{ asset('img/slides/camera/img1.jpg')}}" data-src="{{ asset('img/slides/camera/img1.jpg')}}">
+					<div data-thumb="http://images.electricpig.co.uk/wp-content/uploads/2012/03/game-over.jpg" data-src="http://images.electricpig.co.uk/wp-content/uploads/2012/03/game-over.jpg">
 						<div class="camera_caption fadeFromBottom">
-							<h2>Twitter bootstrap</h2>
+							<h2>Mario </h2>
 							<div class="hidden-phone">
 								<p>
 									 Mei ad recteque rationibus, ex quaeque civibus eloquentiam vim. Solet cetero id nam. Ne eos nonumy voluptua, vis nobis euismod qualisque te, no nam debet oporteat.
@@ -24,9 +31,9 @@
 							</div>
 						</div>
 					</div>
-					<div data-thumb="{{ asset('img/slides/camera/img2.jpg')}}" data-src="{{ asset('img/slides/camera/img2.jpg')}}">
+					<div data-thumb="http://www.mesapps.com/images2/11523.jpg" data-src="http://www.mesapps.com/images2/11523.jpg">
 						<div class="camera_caption fadeFromBottom">
-							<h2>Responsive layout</h2>
+							<h2>WarGame</h2>
 							<div class="hidden-phone">
 								<p>
 									 Nam omnium salutandi ad, accusam indoctum ne mel, posse expetendis mea at. Luptatum antiopam pro ne. Eum at autem antiopam sadipscing, an his omnis splendide perfecto.
@@ -34,9 +41,9 @@
 							</div>
 						</div>
 					</div>
-					<div data-thumb="{{ asset('img/slides/camera/img3.jpg')}}" data-src="{{ asset('img/slides/camera/img3.jpg')}}">
+					<div data-thumb="http://www.hdwallpapers.in/walls/marvel_heroes_game-HD.jpg" data-src="http://www.hdwallpapers.in/walls/marvel_heroes_game-HD.jpg">
 						<div class="camera_caption fadeFromBottom">
-							<h2>Metro style</h2>
+							<h2>Marvel Heros</h2>
 							<div class="hidden-phone">
 								<p>
 									 Lorem ipsum dolor sit amet, dicam singulis in ius, eu timeam aperiam pri. His suas solum legimus eu, sea an duis habemus urbanitas. No sapientem consetetur sit an.
@@ -44,9 +51,9 @@
 							</div>
 						</div>
 					</div>
-					<div data-thumb="{{ asset('img/slides/camera/img4.jpg')}}" data-src="{{ asset('img/slides/camera/img4.jpg')}}">
+					<div data-thumb="http://www.gameremnant.com/wp-content/uploads/2014/02/angry-bird-game-hd-wallpaper.jpg" data-src="http://www.gameremnant.com/wp-content/uploads/2014/02/angry-bird-game-hd-wallpaper.jpg">
 						<div class="camera_caption fadeFromBottom">
-							<h2>Lot of features</h2>
+							<h2>Angry Birds</h2>
 							<div class="hidden-phone">
 								<p>
 									 Sit et laudem aperiri argumentum. Vim laboramus instructior eu, minim aliquid accusata ut est, sea ut ridens causae quaerendum. Ea vide posidonium usu qui ad pertinax.
@@ -62,88 +69,75 @@
 	</div>
        
     </section>
+ <section id="maincontent">
+    <div class="container">
+            <div class="row">
+                    <div class="span12">
+                            <h4>Ingésup </h4>
+                            <p> Ingésup est une école supérieure d'ingénierie informatique privée, fondée en 1985.</p>
+                            <p>
+                            Pour s’ouvrir à la plus grande diversité de profils, Ingésup propose deux cycles de formation : un cycle préparatoire intégré ouvert aux étudiants qui optent pour une admission directement après le baccalauréat et un cycle d’ingénierie de 3 ans ouvert aux étudiants titulaires d’un titre de niveau Bac + 2 (DUT, BTS…).
+                            </p>
+                            <p>
+                            La formation d'Ingésup prépare au titre d'Expert en Informatique et Systèmes d'Information, inscrit au Répertoire National de la Certification Professionnelle (RNCP) au niveau 1.
+                            </p>
+                            <blockquote>
+                                    <p>
+                                        Le Labo Game : Le laboratoire Games forme des étudiants au développement de jeux vidéo et à tous les métiers qui s’y rapportent.
+                                    </p>
+                            </blockquote>
+                            <p>
+                             Les étudiants suivent des méthodes de gestion de projets adaptées à la création de jeux vidéo.
+
+    Les différents membres sont sensibilisés aux divers concepts clés qui permettent de réaliser des jeux de haut niveau et d’améliorer les compétences de chacun dans ce domaine aussi particulier que passionnant.	
+                            </p>
+                    </div>
+            </div>
+    </div>
+</section>
     <!--pricingtable-->
     <section id="maincontent">
-    <div class="container">
+        <div class="container">
+	<!-- divider -->
 	<div class="row">
 		<div class="span12">
-			{#<h3>Example pricing boxes with well</h3>#}
-			<div class="row">
-				<div class="span3">
-					<div class="well well-primary">
-						<h2>Primary</h2>
-						<p>
-							<span class="label">BUDGET</span>
-						</p>
-						<ul class="check-white">
-							<li>20 users</li>
-							<li>Unlimited access with no limits</li>
-							<li>5TB of space</li>
-							<li>E-mail support</li>
-						</ul>
-						<h3>$20.99 / month</h3>
-						<p>
-							<a class="btn btn-large" href="#"><i class="icon-ok icon"></i> Select plan</a>
-						</p>
-					</div>
-				</div>
-				<div class="span3">
-					<div class="well well-warning">
-						<h2>Warning</h2>
-						<p>
-							<span class="label">BUDGET</span>
-						</p>
-						<ul class="check-white">
-							<li>20 users</li>
-							<li>Unlimited access with no limits</li>
-							<li>5TB of space</li>
-							<li>E-mail support</li>
-						</ul>
-						<h3>$30.99 / month</h3>
-						<p>
-							<a class="btn btn-large" href="#"><i class="icon-ok icon"></i> Select plan</a>
-						</p>
-					</div>
-				</div>
-				<div class="span3">
-					<div class="well well-info">
-						<h2>Info</h2>
-						<p>
-							<span class="label">BUDGET</span>
-						</p>
-						<ul class="check-white">
-							<li>20 users</li>
-							<li>Unlimited access with no limits</li>
-							<li>5TB of space</li>
-							<li>E-mail support</li>
-						</ul>
-						<h3>$40.99 / month</h3>
-						<p>
-							<a class="btn btn-large" href="#"><i class="icon-ok icon"></i> Select plan</a>
-						</p>
-					</div>
-				</div>
-				<div class="span3">
-					<div class="well well-success">
-						<h2>Success</h2>
-						<p>
-							<span class="label">POPULAR</span>
-						</p>
-						<ul class="check-white">
-							<li>20 users</li>
-							<li>Unlimited access with no limits</li>
-							<li>5TB of space</li>
-							<li>E-mail support</li>
-						</ul>
-						<h3>$50.99 / month</h3>
-						<p>
-							<a class="btn btn-large" href="#"><i class="icon-ok icon"></i> Select plan</a>
-						</p>
-					</div>
-				</div>
+			<div class="divider">
 			</div>
 		</div>
 	</div>
-    </div>
+              <div class="row">
+		<div class="span12">
+			<h3 class="heading-success"><span class="btn btn-large btn-success"><i class="m-icon-big-swapdown m-icon-white"></i></span>&nbsp;&nbsp;Ecoles</h3>
+                            <div id="latest-work" class="carousel btleft">
+                                    <div class="carousel-wrapper">
+                                            <ul class="portfolio-home da-thumbs">
+                                                {% for ecole in entities %}
+                                                    <li>                                                       
+                                                        <div>
+                                                            <div class="well {{array_color[ecole.id]}}">
+                                                                    <h2>{{ecole.nomsite}}</h2>
+                                                                    <p>{{ecole.adressesite}}</p>
+                                                                    <p>Téléphone : {{ecole.telephone}}</p>
+                                                                    <p>Fax : {{ecole.fax}}</p>
+                                                                    <div style="overflow:hidden;width:200px;height:140px">
+                                                                                <a style="display:block;height:100%" href="{{array_href_ecole[ecole.id]}}">
+                                                                                <img alt="Image" height="160" src="{{array_img_ecole[ecole.id]}}"style="margin-left:-6px" width="240" border="0">
+                                                                                </a>
+                                                                    </div>
+                                                                                <br/>
+                                                                    <p>
+                                                                       <a class="btn btn-large" target="_blank" href="{{array_url_ecole[ecole.id]}}"><i class="icon-ok icon"></i> Selectionner</a>
+                                                                    </p>        
+                                                            </div>
+                                                        </div>
+                                                    </li> 
+                                                {%endfor%}
+                                            </ul>
+                                    </div>
+                            </div>
+		</div>
+	</div>
+	</div>
     </section>
+
     {% endblock %}

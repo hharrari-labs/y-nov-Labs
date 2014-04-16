@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ynov\LabsBundle\Entity\Labs;
 use Ynov\LabsBundle\Entity\Site;
+use Ynov\LabsBundle\Entity\Labsites;
 use Ynov\LabsBundle\Form\LabsType;
 
 /**
@@ -24,10 +25,23 @@ class LabsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('YnovLabsBundle:Labs')->findAll();
-         
+        $entities = $em->getRepository('YnovLabsBundle:Labs')->findAll();     
+        $labsites = $em->getRepository('YnovLabsBundle:Labsites')->findAll();
+        $url_lab = array(   1 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-games.html",
+                                    2 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-microsoft.html  ",
+                                    3=> "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-microsoft.html  ",
+                                    4 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-reseau-securite.html" ,
+                                    5 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-reseau-securite.html" ,
+                                    6 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-developpement.html" ,
+                                    7 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-apple.html" ,
+                                    8 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-apple.html", 
+                                    9 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-apple.html" ,
+                                    10 => "http://www.ingesup.com/formation-informatique/laboratoire/laboratoire-apple.html", 
+                    );
         return $this->render('YnovLabsBundle:Labs:index.html.twig', array(
             'entities' => $entities,
+            'labsites' => $labsites,
+            'url_lab' => $url_lab,
         ));
     }
     /**
@@ -36,9 +50,9 @@ class LabsController extends Controller
      */
     public function createAction(Request $request)
     {
-        if(!$this->isAdmin()){
-             return $this->redirect($this->generateUrl('accueil'));
-        }
+//        if(!$this->isAdmin()){
+//             return $this->redirect($this->generateUrl('accueil'));
+//        }
         $entity = new Labs();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -94,9 +108,9 @@ class LabsController extends Controller
      */
     public function newAction()
     {
-        if(!$this->isAdmin()){
-             return $this->redirect($this->generateUrl('accueil'));
-        }
+//        if(!$this->isAdmin()){
+//             return $this->redirect($this->generateUrl('accueil'));
+//        }
         $entity = new Labs();
         $form   = $this->createCreateForm($entity);
 

@@ -130,9 +130,9 @@ class SiteController extends Controller
     public function editAction($id)
     {
         //Un utilisateur non administrateur ne peut pas créer une école
-        if(!$this->isAdmin()){
-             return $this->redirect($this->generateUrl('accueil'));
-        }
+//        if(!$this->isAdmin()){
+//             return $this->redirect($this->generateUrl('accueil'));
+//        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Site')->find($id);
@@ -178,9 +178,9 @@ class SiteController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        if(!$this->isAdmin()){
-             return $this->redirect($this->generateUrl('accueil'));
-        }
+//        if(!$this->isAdmin()){
+//             return $this->redirect($this->generateUrl('accueil'));
+//        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Site')->find($id);

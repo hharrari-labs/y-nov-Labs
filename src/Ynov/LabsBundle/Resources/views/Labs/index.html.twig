@@ -1,66 +1,81 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<section id="subintro">
-<div class="jumbotron subhead" id="overview">
-	<div class="container">
-		<div class="row">
-			<div class="span8">
-				<h3><i class="m-icon-big-swapright m-icon-white"></i> Les Labos d'Ingésup</h3>
-				<p>
-					Presentation des différents labos dans l'ensemble des écoles d'Ingésup
-				</p>
-			</div>
-			<div class="span4">
-				<div class="input-append">
-					<form class="form-search">
-						<input type="text" class="input-medium search-query">
-						<button type="submit" class="btn btn-inverse">Search</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</section>
-<section id="maincontent">
-<div class="container">
-         {% for entity in entities %}
-                        <div class="row">
-				<div class="span3">
-					<div class="well well-primary">
-						<h2>{{ entity.nomlab }}</h2>
-						<p>
-							<span class="label">Disponible</span>
-                                                        
-						</p>
-                                                {#<ul class="check-white">
-                                                {% for site in site_entities %}						
-							<li>{{ site.nomsite }}</li>						
-                                                {% endfor %}
-                                                </ul>#}
-						<p>
-							<a class="btn btn-large" href="#"><i class=" icon"></i> En savoir +</a>
-						</p>
-					</div>
-				</div>
-                                <div class="span9">
-                                    <p>
-                                        {{ entity.descriptionlab }}
-                                    </p>
-                               </div>
+    <script type="text/javascript">
+        $(".ff").each(function() {
+            $(".ff").removeClass('active');
+        })
+        $(".Labos").addClass('active');
+    </script>
+    <section id="subintro">
+        <div class="jumbotron subhead" id="overview">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h3><i class="m-icon-big-swapright m-icon-white"></i> Les Labos d'Ingésup</h3>
+                        <p>
+                            Presentation des différents labos dans l'ensemble des écoles d'Ingésup
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="maincontent">
+        <div class="container">
+            {% for entity in entities %}
+                <div class="row">
+                    <dl class="dl-horizontal" >
+                        <dt>
+                        <div class="well well-primary">
+                            <h2>{{ entity.nomlab }}</h2>
+                            <p>
+                                <span class="label">Disponible</span>
+
+                            </p>
+                            <ul class="check-white">
+                                {% for site in labsites %}						
+                                   {% if (site.idlab.id == entity.id) %}  
+                                     <li>{{ site.idsite.nomsite }}</li>						
+                                   {% endif %}						
+                                {% endfor %}
+                            </ul>
+                          {#  <p>
+                                <span class="label">Indisponible</span>
+
+                            </p>#}
+                           {# <ul class="check-white">
+                                {% for siteb in labsites %}
+                                 {% if (not(siteb.id == entity.id)) %}
+                                <li>{{ siteb.idsite.nomsite }}</li>						
+                                {% endif %}
+                              {% endfor %}
+                            </ul>#}
+                            <p>
+                                <a class="btn btn-large" target="_blank" href="{{ url_lab[entity.id] }}"><i class=" icon"></i> En savoir +</a>
+                            </p>
                         </div>
-    {% endfor %}
-  </div>
-</section>
+                        </dt>
+                        <dd>
+                            <p>
+                                {{ entity.descriptionlab }}
+                            </p>
+                        </dd>        
+                    </dl>        
+
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 
     {%if(app.user.getGroupe()=="Admin" or app.user.getGroupe()=="DirLab")%}
-    <ul>
-        <li>
-            <a href="{{ path('labs_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <a href="{{ path('labs_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
     {%endif%}
-    {% endblock %}
+{% endblock %}
