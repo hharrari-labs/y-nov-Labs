@@ -30,25 +30,35 @@ class ProjetController extends Controller
             'method' => 'POST'));
         $searchForm->add('submit', 'submit', array('label' => 'Search'));
         $searchForm->handleRequest($request);
-
+        
         if ($searchForm->isValid()) {
             $annee=$searchForm['annee']->getData();
             $projet=$searchForm['projet']->getData();
             $ecole=$searchForm['ecole']->getData();
+            $lab=$searchForm['lab']->getData();
             if($projet!=null){
                 $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array('id' => $projet->getId()), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
             }
-            else if($ecole!=null){
-                $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array('idsite' => $ecole->getId()), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
-            }    
-            else if($annee!=null){
-                $query = "SELECT DISTINCT p FROM YnovLabsBundle:Projet p WHERE YEAR(p.datecreation)=".$annee->format('y'); 
+            else{
+                $query = "SELECT DISTINCT p FROM YnovLabsBundle:Projet p WHERE 1=1";
+                if($lab!=null){
+                    $query=$query . " and p.idlab=".$lab->getId();
+                }
+                if($ecole!=null){
+                    $query=$query . " and p.idsite=".$ecole->getId();
+                }
+                if($annee!=null){
+                    $query=$query . " and YEAR(p.datecreation)=".$annee->format('y');
+                }
+                $query=$query." order by p.nomprojet ASC, p.datecreation DESC";
                 $rep=$em->createQuery($query);
                 $entities= $rep->getResult();
             }
-            else{
-                $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array(), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
-            }
+            return $this->render('YnovLabsBundle:Projet:index.html.twig', array(
+            'entities' => $entities,
+            'search'  => $searchForm->createView(),
+        ));
+            
         }
         return $this->render('YnovLabsBundle:Projet:index.html.twig', array(
             'entities' => $entities,

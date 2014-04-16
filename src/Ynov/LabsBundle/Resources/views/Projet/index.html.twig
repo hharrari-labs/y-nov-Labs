@@ -11,9 +11,10 @@
                                     <table>
                                         <tr>
                                             <td><h3> Liste des Projets</h3></td>
-                                            <td>{{ form_widget(search.annee.year, { 'attr': {'class': 'input-medium search-query'} })}}</td>
-                                            <td>{{ form_widget(search.projet, { 'attr': {'class': 'input-medium search-query'} })}}</td>
+                                            {#<td>{{ form_widget(search.annee.year, { 'attr': {'class': 'input-medium search-query'} })}}</td>#}
+                                            <td>{{ form_widget(search.lab, { 'attr': {'class': 'input-medium search-query'} })}}</td>
                                             <td>{{ form_widget(search.ecole, { 'attr': {'class': 'input-medium search-query'} })}}</td>
+                                            <td>{{ form_widget(search.projet, { 'attr': {'class': 'input-medium search-query'} })}}</td>
                                             <td>{{ form_widget(search.submit, { 'label': 'Rechercher', 'attr': {'class': 'btn btn-inverse'} })}}</td>
                                         </tr>
                                     </table>

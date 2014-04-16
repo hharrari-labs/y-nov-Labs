@@ -30,12 +30,12 @@ class ProjSearchType extends AbstractType
                   ->orderBy('p.nomprojet', 'ASC');
                   },
                   'empty_value' => 'Nom',
-                  'required' => false)
+                  'required' => false,)
                   )
             ->add('annee','date',array(
                   'label'=>'Année',
                   'empty_value' => 'Année',
-                  'required' => false)
+                  'required' => false,)
                  )
             ->add('ecole','entity', array(
                   'class' => 'YnovLabsBundle:Site',
@@ -44,8 +44,16 @@ class ProjSearchType extends AbstractType
                   ->orderBy('s.nomsite', 'ASC');
                   },
                   'empty_value' => 'Ecole',
-                  'required' => false)
+                  'required' => false,)
                  )
+            ->add('lab','entity', array(
+                  'class' => 'YnovLabsBundle:Labs',
+                  'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('l')
+                  ->orderBy('l.nomlab', 'ASC');
+                  },
+                  'empty_value' => 'Lab',
+                  'required' => false,))
         ;
     }
     
