@@ -111,6 +111,15 @@ class Projet
      * })
      */
     private $idlab;
+    /**
+     * @var Site
+     *
+     * @ORM\ManyToOne(targetEntity="Site")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDSITE", referencedColumnName="IDSITE")
+     * })
+     */
+    private $idsite;
 
     /**
      * @Assert\File(maxSize="6000000")
@@ -367,7 +376,7 @@ class Projet
      */
     public function getLogo()
     {
-        return $this->getWebPath();
+        return $this->logo;
     }
 
     /**
@@ -524,5 +533,34 @@ class Projet
     public function getPhotos()
     {
         return $this->photos;
+    }
+    public function __toString() {
+        return $this->getNomprojet();
+    }
+
+    /**
+     * Set idsite
+     *
+     * @param \Ynov\LabsBundle\Entity\Site $idsite
+     * @return Projet
+     */
+    public function setIdsite(\Ynov\LabsBundle\Entity\Site $idsite = null)
+    {
+        $this->idsite = $idsite;
+
+        return $this;
+    }
+
+    /**
+     * Get idsite
+     *
+     * @return \Ynov\LabsBundle\Entity\Site 
+     */
+    public function getIdsite()
+    {
+        return $this->idsite;
+    }
+    public function getEmbed(){
+        return str_replace('watch?v=', 'embed/', $this->getVideoprojet());
     }
 }

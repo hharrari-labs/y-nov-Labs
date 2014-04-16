@@ -27,4 +27,4 @@ photo_update:
 photo_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "YnovLabsBundle:Photo:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

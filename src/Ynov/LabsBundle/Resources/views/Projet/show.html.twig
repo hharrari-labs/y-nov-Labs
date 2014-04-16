@@ -1,6 +1,102 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<section id="subintro">
+<div class="jumbotron subhead" id="overview">
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<h1 style="font-size: 100px;"> <= </h1>
+
+			</div>
+			<div class="span10">
+                            <h1 style="font-size: 50px;">{{entity.nomprojet}} QUe je test encore et encore</h1>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<section id="maincontent">
+<div class="container">
+	<div class="row">
+		<div class="span6">
+			<div class="well">
+				<iframe class="video" src="{{entity.getEmbed()}}">
+				</iframe>
+			</div>
+		</div>
+		<div class="span6">
+			<h4>Détail du projet</h4>
+			<div class="accordion" id="accordion2">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+						1. Présentation du projet </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<img src="assets/img/icons/responsive-icon.png" class="alignleft" alt="" />
+							<h5>Description</h5>
+							<p>
+								{{entity.description}} 
+							</p>
+							{#<a href="#" class="btn btn-success">View portfolio</a>#}
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						2. Technologies </a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<img src="assets/img/icons/design-icon.png" class="alignleft" alt="" />
+							<h5>Technologies utilisées</h5>
+							<p>
+								 {{entity.technologie}} posse expetendis mea at. Luptatum antiopam pro ne. Eum at autem antiopam.
+							</p>
+							{#<a href="#" class="btn btn-success">View portfolio</a>#}
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+						3. Equipe </a>
+					</div>
+					<div id="collapseThree" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<img src="assets/img/icons/statistic-icon.png" class="alignleft" alt="" />
+							<h5>Détail de l'équipe</h5>
+							<p>
+								{{entity.equipe}} Sit et laudem aperiri argumentum. Vim laboramus instructior eu, minim aliquid accusata ut est, sea ut ridens causae quaerendum ea vide.
+							</p>
+							{#<a href="#" class="btn btn-success">View portfolio</a>#}
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+						4. Téléchargement/Page </a>
+					</div>
+					<div id="collapseFour" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<img src="assets/img/icons/wp-icon.png" class="alignleft" alt="" />
+							<h5>Pour jouer/télécharger</h5>
+							<p>
+								 {{entity.lienprojet}} Mei ad recteque rationibus, ex quaeque civibus eloquentiam vim. Solet cetero id nam. Ne eos nonumy voluptua, vis nobis euismod qualisque.
+							</p>
+							<a href="#" class="btn btn-success">View portfolio</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
     <h1>Projet</h1>
 
     <table class="table">

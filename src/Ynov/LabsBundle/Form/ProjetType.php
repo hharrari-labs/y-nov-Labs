@@ -31,12 +31,19 @@ class ProjetType extends AbstractType
                   'type' => new PhotoType(),
                   'allow_add' => true,
                   'by_reference' => false,
+                  'required' => false,
                     ))
             ->add('idlab','entity', array(
                   'class' => 'YnovLabsBundle:Labs',
                   'query_builder' => function(EntityRepository $er) {
                   return $er->createQueryBuilder('l')
                   ->orderBy('l.nomlab', 'ASC');
+                  },))
+            ->add('idsite','entity', array(
+                  'class' => 'YnovLabsBundle:Site',
+                  'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('s')
+                  ->orderBy('s.nomsite', 'ASC');
                   },))
             ->add('idutilisateur')
         ;

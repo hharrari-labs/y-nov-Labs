@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ynov\LabsBundle\Entity\Projet;
 use Ynov\LabsBundle\Form\ProjetType;
+use Ynov\LabsBundle\Form\ProjSearchType;
 
 /**
  * Projet controller.
@@ -19,14 +20,39 @@ class ProjetController extends Controller
      * Lists all Projet entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('YnovLabsBundle:Projet')->findAll();
+        $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array(), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
+        $searchForm= $this->createForm(new ProjSearchType(), array(
+            'action' => $this->generateUrl('projet'),
+            'method' => 'POST'));
+        $searchForm->add('submit', 'submit', array('label' => 'Search'));
+        $searchForm->handleRequest($request);
 
+        if ($searchForm->isValid()) {
+            $annee=$searchForm['annee']->getData();
+            $projet=$searchForm['projet']->getData();
+            $ecole=$searchForm['ecole']->getData();
+            if($projet!=null){
+                $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array('id' => $projet->getId()), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
+            }
+            else if($ecole!=null){
+                $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array('idsite' => $ecole->getId()), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
+            }    
+            else if($annee!=null){
+                $query = "SELECT DISTINCT p FROM YnovLabsBundle:Projet p WHERE YEAR(p.datecreation)=".$annee->format('y'); 
+                $rep=$em->createQuery($query);
+                $entities= $rep->getResult();
+            }
+            else{
+                $entities = $em->getRepository('YnovLabsBundle:Projet')->findBy(array(), array('nomprojet' => 'ASC','datecreation' => 'DESC'));
+            }
+        }
         return $this->render('YnovLabsBundle:Projet:index.html.twig', array(
             'entities' => $entities,
+            'search'  => $searchForm->createView(),
         ));
     }
     /**
@@ -60,7 +86,7 @@ class ProjetController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('projet'));
+            return $this->redirect($this->generateUrl('projet_show', array('id' => $entity->getId())));
         }
 
         return $this->render('YnovLabsBundle:Projet:new.html.twig', array(
@@ -136,7 +162,7 @@ class ProjetController extends Controller
         if(!$this->isAdmin() && !$this->isDirlab() && !$this->isChefprojet()){
              return $this->redirect($this->generateUrl('accueil'));
         }
-
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Projet')->find($id);
@@ -147,6 +173,7 @@ class ProjetController extends Controller
         if($this->isChefprojet() && $entity->getIdutilisateur()->getId()!=$this->getUser()->getId()){
              return $this->redirect($this->generateUrl('projet'));
         }
+        $this->getRequest()->getSession()->set('projet',$id);
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -184,22 +211,29 @@ class ProjetController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('YnovLabsBundle:Projet')->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Projet entity.');
         }
-
+        $logo=$entity->getLogo();
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
 
-            if($entity->getPhotos()->count()>1){
+            if($entity->getPhotos()->count()>0){
+                
                 foreach ($entity->getPhotos() as $photo){
                    $photo->upload();
                    $photo->setIdprojet($entity);
                 }
+            }
+            if($entity->getFile()!=null){
+                   if(file_exists($entity->getWebPath())){
+                        unlink($entity->getWebPath());
+                   }
+                   $entity->upload();
             }
             $date = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
             $entity->setDatemajprojet($date);

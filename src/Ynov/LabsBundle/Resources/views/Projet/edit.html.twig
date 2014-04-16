@@ -8,6 +8,11 @@
                             {{ form_start(edit_form) }}
                             <table class="table">
                                 <tr>
+                                    <td>{{ form_label(edit_form.idsite,'Ecole')}}</td>
+                                    <td>{{ form_widget(edit_form.idsite) }}</td>
+                                    <td>{{ form_errors(edit_form.idsite) }}</td>
+                                </tr>
+                                <tr>
                                     <td>{{ form_label(edit_form.idlab,'Laboratoire')}}</td>
                                     <td>{{ form_widget(edit_form.idlab) }}</td>
                                     <td>{{ form_errors(edit_form.idlab) }}</td>
@@ -50,13 +55,13 @@
                                  <tr>
                                     <td>{{ form_label(edit_form.file,'Logo')}}</td>
                                     <td>{{ form_widget(edit_form.file) }}</td>
-                                    <td>{{ edit_form.vars.value.logo }}{{ form_errors(edit_form.file) }}</td>
+                                    <td><img style="height: 50px;" src="{{ asset(entity.getWebPath()) }}" /></td>
                                 </tr>
                             </table>
                             <h3>Ajoutez des photos à ce projet</h3>  
                             <ul class="photos" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
                                 {% for photo in edit_form.photos %}
-                                    <li>{{ form_row(photo.file) }} <img src="{{ asset(photo.vars.value.path) }}"/></li>
+                                    <li>{%if(photo.vars.value.path==null)%}{{ form_widget(photo.file) }}{%else%} <img src="{{ asset(photo.vars.value.path) }}" alt="photo"/> <a href="{{ path('photo_delete',{'id': photo.vars.value.id}) }}">Supprimer</a>{%endif%}</li>
                                 
                                 {% endfor %}
                             </ul>
@@ -71,6 +76,7 @@
                                     Liste des Projets
                                     </a>
                                 </li>
+                                <li>{{ form(delete_form) }}</li>
                             </ul>
                             
                     </div>
@@ -110,8 +116,5 @@
         $newLinkLi.before($newFormLi);
     }
     </script>
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+ 
 {% endblock %}

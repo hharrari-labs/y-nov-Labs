@@ -204,25 +204,23 @@ class PhotoController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        if(!$this->isAdmin()){
-             return $this->redirect($this->generateUrl('accueil'));
-        }
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+//        $form = $this->createDeleteForm($id);
+//        $form->handleRequest($request);
+//
+//        if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('YnovLabsBundle:Photo')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('YnovLabsBundle:Photo')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Photo entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Photo entity.');
         }
 
-        return $this->redirect($this->generateUrl('photo'));
+        $em->remove($entity);
+        $em->flush();
+//        }
+
+        return $this->redirect($this->generateUrl('projet_edit', array('id' => $this->getRequest()->getSession()->get('projet'))));
     }
 
     /**
